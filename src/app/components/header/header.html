@@ -1,0 +1,32 @@
+<div class="accessibility-widget" [class.open]="isAccessibilityOpen">
+    <button class="accessibility-toggle" (click)="toggleAccessibilityMenu()" aria-label="Barrierefreiheitsmenü öffnen">
+        <img src="assets/icon/barrierefreiheit.svg" alt="Barrierefreiheit Symbol">
+    </button>
+    <ul class="accessibility-menu">
+        <li>
+            <button (click)="speakContent()" aria-label="Inhalt vorlesen"><i class="fa-solid fa-volume-high"></i></button>
+        </li>
+        <li>
+            <button (click)="toggleContrast()" aria-label="Hohen Kontrast anwenden"><i class="fa-solid fa-circle-half-stroke"></i></button>
+        </li>
+        <li>
+            <button (click)="changeTextSize(true)" aria-label="Schrift vergrößern"><i class="fa-solid fa-magnifying-glass-plus"></i></button>
+        </li>
+         <li>
+            <button (click)="changeTextSize(false)" aria-label="Schrift verkleinern"><i class="fa-solid fa-magnifying-glass-minus"></i></button>
+        </li>
+    </ul>
+</div>
+
+<div class="header-controls">
+    <div class="theme-switcher">
+        <button (click)="toggleTheme()" [attr.aria-label]="isDarkMode ? 'Hellen Modus aktivieren' : 'Dunklen Modus aktivieren'">
+            <i class="fa-solid" [ngClass]="isDarkMode ? 'fa-sun' : 'fa-moon'"></i>
+        </button>
+    </div>
+    <div class="lang-switcher">
+        <button (click)="switchLang('de')" [class.active]="currentLang === 'de'">DE</button>
+        <button (click)="switchLang('en')" [class.active]="currentLang === 'en'">EN</button>
+        <button (click)="switchLang('es')" [class.active]="currentLang === 'es'">ES</button>
+    </div>
+</div>

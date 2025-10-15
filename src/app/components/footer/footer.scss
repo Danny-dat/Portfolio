@@ -1,0 +1,17 @@
+footer {
+    width: 100%;
+    text-align: center;
+    padding: 20px;
+    font-size: 0.9rem;
+    color: #a0a8b1;
+    background-color: var(--contact-bg); /* Passt zum Kontakt-Hintergrund */
+    /* Die folgenden 3 Zeilen werden entfernt, um die absolute Positionierung aufzuheben */
+}
+footer a {
+    color: var(--primary-color);
+    text-decoration: none;
+    margin: 0 10px;
+}
+footer a:hover {
+    text-decoration: underline;
+}

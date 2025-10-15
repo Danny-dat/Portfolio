@@ -1,0 +1,56 @@
+<section id="contact" class="snap-section">
+    <div class="contact-columns-container">
+        <div class="contact-info-col">
+            <div class="contact-card-wrapper">
+                <h2 class="i18n" lang="de" [class.active]="currentLang === 'de'">Kontakt & Profile</h2>
+                <h2 class="i18n" lang="en" [class.active]="currentLang === 'en'">Contact & Profiles</h2>
+                <h2 class="i18n" lang="es" [class.active]="currentLang === 'es'">Contacto y Perfiles</h2>
+                
+                <div class="card-content-wrapper">
+                    <p class="contact-intro i18n" lang="de" [class.active]="currentLang === 'de'">Ich freue mich darauf, von Ihnen zu hören. Ob Projektanfrage, Feedback oder Networking – hier finden Sie alle Wege, mich zu erreichen.</p>
+                    <p class="contact-intro i18n" lang="en" [class.active]="currentLang === 'en'">I look forward to hearing from you. Whether for a project inquiry, feedback, or networking – here are all the ways to reach me.</p>
+                    <p class="contact-intro i18n" lang="es" [class.active]="currentLang === 'es'">Espero con interés saber de usted. Ya sea para una consulta de proyecto, comentarios o networking, aquí encontrará todas las formas de contactarme.</p>
+                    <ul>
+                        <li><i class="fa-solid fa-envelope"></i><a href="mailto:deine-email@beispiel.com">deine-email@beispiel.com</a></li>
+                        <li>
+                            <i class="fa-solid fa-location-dot"></i>
+                            <span class="i18n" lang="de" [class.active]="currentLang === 'de'">Standort: Ruhrgebiet, Deutschland</span>
+                            <span class="i18n" lang="en" [class.active]="currentLang === 'en'">Location: Ruhr Area, Germany</span>
+                            <span class="i18n" lang="es" [class.active]="currentLang === 'es'">Ubicación: Región del Ruhr, Alemania</span>
+                        </li>
+                    </ul>
+                    <div class="social-links">
+                        <a href="#" target="_blank" aria-label="LinkedIn"><i class="fa-brands fa-linkedin"></i></a>
+                        <a href="#" target="_blank" aria-label="Xing"><i class="fa-brands fa-xing"></i></a>
+                        <a href="#" target="_blank" aria-label="GitHub"><i class="fa-brands fa-github"></i></a>
+                    </div>
+                </div>
+
+                <a href="assets/pdf/lebenslauf.pdf" download class="btn">
+                    <span class="i18n" lang="de" [class.active]="currentLang === 'de'">Lebenslauf als PDF</span>
+                    <span class="i18n" lang="en" [class.active]="currentLang === 'en'">CV as PDF</span>
+                    <span class="i18n" lang="es" [class.active]="currentLang === 'es'">CV en PDF</span>
+                </a>
+            </div>
+        </div>
+
+        <div class="contact-form-col">
+            <div class="contact-card-wrapper">
+                <h2 class="i18n" lang="de" [class.active]="currentLang === 'de'">Schreiben Sie mir eine Nachricht</h2>
+                <h2 class="i18n" lang="en" [class.active]="currentLang === 'en'">Send Me a Message</h2>
+                <h2 class="i18n" lang="es" [class.active]="currentLang === 'es'">Enviar un Mensaje</h2>
+
+                <form action="https://formspree.io/f/meolvepq" method="POST">
+                    <input type="email" name="email" placeholder="Ihre E-Mail" required>
+                    <textarea name="message" rows="5" placeholder="Ihre Nachricht" required></textarea>
+                    
+                    <button type="submit" class="btn">
+                        <span class="i18n" lang="de" [class.active]="currentLang === 'de'">Senden</span>
+                        <span class="i18n" lang="en" [class.active]="currentLang === 'en'">Send</span>
+                        <span class="i18n" lang="es" [class.active]="currentLang === 'es'">Enviar</span>
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>

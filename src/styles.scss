@@ -1,1 +1,78 @@
-/* You can add global styles to this file, and also import other style files */
+/* --- GRUNDEINSTELLUNGEN & DESIGN-SYSTEM (mit Feedback-Farben) --- */
+:root {
+    --primary-color: #54B7FF; // Blau aus PDF
+    --secondary-color: #343A40;
+    --background-color: #FFFFFF;
+    --text-color: #343A40;
+    --black-color: #232725; // Schwarz aus PDF
+    --yellow-color: #E6BA25; // Gelb aus PDF
+    --light-gray: #F8F9FA;
+    --border-color: #DEE2E6;
+    --font-family: 'Helvetica Neue', Arial, sans-serif;
+}
+
+body.dark-mode {
+    --background-color: #121212;
+    --text-color: #E9ECEF;
+    --light-gray: #1C1C1C;
+    --secondary-color: #E9ECEF;
+    --border-color: #495057;
+}
+
+/* Weitere globale Stile aus Ihrer index.html hier einfügen... */
+*, *::before, *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: var(--font-family);
+    color: var(--text-color);
+    background-color: var(--background-color);
+    line-height: 1.6;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+/* --- SPRACHSICHTBARKEIT --- */
+.i18n {
+    display: none;
+}
+.i18n.active {
+    display: block;
+}
+/* NEU: Globale Regel für das Vorlese-Highlight */
+.speaking-highlight {
+    background-color: rgba(84, 183, 255, 0.3); /* Nutzt die Primärfarbe mit Transparenz */
+    border-radius: 3px;
+    transition: background-color 0.3s ease-in-out;
+    box-decoration-break: clone;
+    -webkit-box-decoration-break: clone;
+}
+/* --- BARRIEREFREIHEITS-FEATURES --- */
+body.high-contrast {
+    --background-color: #000000; --text-color: #FFFF00;
+    --primary-color: #00FFFF; --secondary-color: #FFFF00;
+    --light-gray: #1a1a1a; --border-color: #FFFF00;
+    --contact-bg: #000000;
+    --contact-card-bg: #1a1a1a;
+    --contact-border-color: #FFFF00;
+    --contact-text-color: #FFFF00;
+}
+body.high-contrast #hero { color: #FFFF00; }
+body.high-contrast .project-card { box-shadow: 0 0 0 2px var(--primary-color); }
+body.high-contrast .btn { background-color: var(--primary-color); color: #000000; }
+body.high-contrast .speaking-highlight { background-color: rgba(0, 255, 255, 0.3); }
+
+html.text-large { font-size: 115%; }
+html.text-xl { font-size: 130%; }

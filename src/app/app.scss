@@ -1,0 +1,94 @@
+/* --- GRUNDEINSTELLUNGEN & DESIGN-SYSTEM (mit PDF-Feedback) --- */
+:root {
+    --primary-color: #54B7FF;      /* Blau aus PDF */
+    --yellow-color: #E6BA25;       /* Gelb aus PDF */
+    --black-color: #232725;         /* Schwarz aus PDF */
+    --secondary-color: #343A40;
+    --background-color: #FFFFFF;
+    --text-color: #343A40;
+    --light-gray: #F8F9FA;
+    --border-color: #DEE2E6;
+    --contact-bg: #33393F;
+    --contact-card-bg: #2B3035;
+    --contact-border-color: #495057;
+    --contact-text-color: #E9ECEF;
+    --font-family: 'Helvetica Neue', Arial, sans-serif;
+}
+
+body.dark-mode {
+    --background-color: #121212;
+    --text-color: #E9ECEF;
+    --light-gray: #1C1C1C;
+    --secondary-color: #E9ECEF;
+    --border-color: #495057;
+    --contact-bg: #121212;
+    --contact-card-bg: #1C1C1C;
+}
+
+*, *::before, *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+/* --- CSS FÜR SCROLL-SNAPPING --- */
+html {
+    scroll-behavior: smooth;
+    font-size: 100%;
+    scroll-snap-type: y mandatory;
+}
+
+body {
+    font-family: var(--font-family);
+    color: var(--text-color);
+    background-color: var(--background-color);
+    line-height: 1.6;
+    transition: background-color 0.3s, color 0.3s;
+    font-size: 1rem;
+}
+
+.snap-section {
+    scroll-snap-align: start;
+    height: 100vh;
+    overflow-y: auto;
+    position: relative;
+}
+
+#hero, #middle-section {
+     padding: 80px 0;
+}
+
+.container { max-width: 1440px; margin: 0 auto; padding: 0 20px; }
+section { padding: 0; }
+h1, h2, h3 { line-height: 1.2; margin-bottom: 20px; }
+h1 { font-size: 3rem; }
+h2 { font-size: 2.5rem; text-align: center; }
+h3 { font-size: 1.5rem; }
+
+.btn {
+    display: inline-block; padding: 12px 25px; background-color: var(--primary-color);
+    color: white; text-decoration: none; border-radius: 5px; font-weight: bold;
+    transition: background-color 0.3s ease, transform 0.3s ease; border: none; cursor: pointer;
+}
+.btn:hover { background-color: #0056b3; transform: translateY(-2px); }
+
+/* --- SPRACHSICHTBARKEIT --- */
+.i18n { display: none; }
+.i18n.active {
+    display: block;
+    text-align: center;
+}
+
+/* --- RESPONSIVE DESIGN --- */
+@media (max-width: 992px) {
+    .contact-columns-container { flex-direction: column; align-items: center; }
+    .contact-info-col, .contact-form-col { flex-basis: auto; padding: 15px 0; width: 100%; max-width: 500px; }
+    .contact-card-wrapper { height: auto; max-width: 100%; }
+}
+@media (max-width: 768px) {
+    h1 { font-size: 2.2rem; }
+    h2 { font-size: 1.8rem; }
+    .path-grid { flex-direction: column; }
+}
+
+

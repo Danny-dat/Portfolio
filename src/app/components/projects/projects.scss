@@ -1,0 +1,93 @@
+/* --- PROJEKTE SEKTION --- */
+#projects {
+    background-color: var(--light-gray);
+    padding: 60px 0;
+}
+.projects-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 30px;
+}
+.project-card {
+    background: var(--background-color);
+    border-radius: 8px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    transition: transform 0.3s ease, box-shadow 0.3s ease; /* Hover-Effekt Vorbereitung */
+}
+
+/* Neuer Hover-Effekt */
+.project-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 25px rgba(0,0,0,0.12);
+}
+
+body.dark-mode .project-card {
+    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+}
+body.dark-mode .project-card:hover {
+    box-shadow: 0 8px 25px rgba(0,0,0,0.3);
+}
+
+.project-image-placeholder {
+    height: 200px;
+    background-color: var(--border-color);
+}
+.project-content {
+    padding: 25px;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+}
+.project-content h3 {
+    margin-top: 0;
+}
+
+/* --- NEUE STILE für die Tech-Icons --- */
+.project-tags {
+    margin: 15px 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: center; /* Zentriert die Icons */
+    min-height: 70px; /* Gibt dem Bereich eine feste Höhe */
+}
+.tag-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 80px;
+}
+.tag-item img {
+    height: 30px;
+    margin-bottom: 8px;
+}
+.tag-item i {
+    font-size: 30px;
+    margin-bottom: 8px;
+    color: var(--primary-color);
+    width: 30px;
+    text-align: center;
+}
+.tag-item span {
+    font-size: 0.75rem;
+    text-align: center;
+}
+/* --- ENDE NEUE STILE --- */
+
+.project-links {
+    margin-top: auto;
+}
+.project-links .btn {
+    margin-right: 10px;
+    background-color: var(--secondary-color);
+}
+.project-links .btn:hover {
+    background-color: #555;
+}
+.navigation-button {
+    text-align: center;
+    margin-top: 40px;
+}
