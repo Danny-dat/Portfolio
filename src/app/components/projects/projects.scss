@@ -1,13 +1,26 @@
 /* --- PROJEKTE SEKTION --- */
 #projects {
     background-color: var(--light-gray);
-    padding: 60px 0;
+    /* padding: 60px 0;  <-- Entfernt, wird jetzt von styles.scss gesteuert */
 }
+
+/* * ANGEPASST FÜR HORIZONTALES SCROLLEN
+ */
 .projects-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    display: flex;        // Geändert von 'grid'
+    flex-direction: row;  // Karten nebeneinander
+    flex-wrap: nowrap;    // Kein Umbruch
+    overflow-x: auto;     // Horizontales Scrollen erlauben
+    overflow-y: hidden;   // Vertikales Scrollen verstecken
+    
     gap: 30px;
+    
+    /* Optional: Etwas Padding, damit die Karten nicht am Rand kleben */
+    padding: 20px 5px; 
 }
+
+/* * ANGEPASST FÜR HORIZONTALES SCROLLEN
+ */
 .project-card {
     background: var(--background-color);
     border-radius: 8px;
@@ -15,22 +28,23 @@
     overflow: hidden;
     display: flex;
     flex-direction: column;
-    transition: transform 0.3s ease, box-shadow 0.3s ease; /* Hover-Effekt Vorbereitung */
+    transition: transform 0.3s ease, box-shadow 0.3s ease; 
+
+    /* NEU: Feste Breite und Schrumpfen verhindern */
+    width: 340px;     // Feste Breite für die Karten
+    flex-shrink: 0;   // Verhindert, dass die Karten gequetscht werden
 }
 
-/* Neuer Hover-Effekt */
 .project-card:hover {
     transform: translateY(-5px);
     box-shadow: 0 8px 25px rgba(0,0,0,0.12);
 }
-
 body.dark-mode .project-card {
     box-shadow: 0 4px 15px rgba(0,0,0,0.2);
 }
 body.dark-mode .project-card:hover {
     box-shadow: 0 8px 25px rgba(0,0,0,0.3);
 }
-
 .project-image-placeholder {
     height: 200px;
     background-color: var(--border-color);
@@ -44,15 +58,13 @@ body.dark-mode .project-card:hover {
 .project-content h3 {
     margin-top: 0;
 }
-
-/* --- NEUE STILE für die Tech-Icons --- */
 .project-tags {
     margin: 15px 0;
     display: flex;
     flex-wrap: wrap;
     gap: 10px;
-    justify-content: center; /* Zentriert die Icons */
-    min-height: 70px; /* Gibt dem Bereich eine feste Höhe */
+    justify-content: center; 
+    min-height: 70px; 
 }
 .tag-item {
     display: flex;
@@ -75,17 +87,16 @@ body.dark-mode .project-card:hover {
     font-size: 0.75rem;
     text-align: center;
 }
-/* --- ENDE NEUE STILE --- */
-
 .project-links {
     margin-top: auto;
 }
+/* KORREKTUR: Button-Farbe für besseren Kontrast */
 .project-links .btn {
     margin-right: 10px;
-    background-color: var(--secondary-color);
+    background-color: var(--primary-color);
 }
 .project-links .btn:hover {
-    background-color: #555;
+    background-color: #0056b3; /* Dunklerer Blauton für Hover */
 }
 .navigation-button {
     text-align: center;

@@ -1,33 +1,53 @@
-/* --- GRUNDEINSTELLUNGEN & DESIGN-SYSTEM (mit Feedback-Farben) --- */
+/* --- SCHRIFTART DEFINIEREN (für variable Schriftart) --- */
+@font-face {
+  font-family: 'Roboto Flex';
+  src: url('assets/fonts/RobotoFlex-Variable.ttf') format('truetype-variations');
+  font-weight: 100 1000;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* --- GRUNDEINSTELLUNGEN & DESIGN-SYSTEM (ANGEPASST AN PDF-FEEDBACK) --- */
 :root {
-    --primary-color: #54B7FF; // Blau aus PDF
-    --secondary-color: #343A40;
+    --primary-color: #54B7FF;      /* Blau aus PDF */
+    --yellow-color: #E6BA25;       /* Gelb aus PDF */
+    --black-color: #232725;         /* Schwarz aus PDF */
+    
     --background-color: #FFFFFF;
-    --text-color: #343A40;
-    --black-color: #232725; // Schwarz aus PDF
-    --yellow-color: #E6BA25; // Gelb aus PDF
+    --text-color: var(--black-color);
     --light-gray: #F8F9FA;
     --border-color: #DEE2E6;
-    --font-family: 'Helvetica Neue', Arial, sans-serif;
+
+    --contact-bg: var(--black-color);
+    --contact-card-bg: #2B3035;
+    --contact-border-color: #495057;
+    --contact-text-color: #E9ECEF;
+
+    --font-family: 'Roboto Flex', 'Helvetica Neue', Arial, sans-serif;
 }
 
 body.dark-mode {
     --background-color: #121212;
     --text-color: #E9ECEF;
     --light-gray: #1C1C1C;
-    --secondary-color: #E9ECEF;
     --border-color: #495057;
+    --contact-bg: #121212;
+    --contact-card-bg: #1C1C1C;
 }
 
-/* Weitere globale Stile aus Ihrer index.html hier einfügen... */
 *, *::before, *::after {
     box-sizing: border-box;
     margin: 0;
     padding: 0;
 }
 
-html {
-    scroll-behavior: smooth;
+/* * KORREKTUR FÜR ÄUSSEREN SCROLLBALKEN
+ * Wir sperren html und body komplett.
+ */
+html, body {
+    height: 100%;
+    overflow: hidden; // Verhindert ALLES Scrollen (x und y)
+    position: relative; 
 }
 
 body {
@@ -37,42 +57,98 @@ body {
     line-height: 1.6;
     transition: background-color 0.3s, color 0.3s;
 }
+/* * ENDE DER KORREKTUR
+ */
 
 .container {
     max-width: 1200px;
     margin: 0 auto;
     padding: 0 20px;
 }
-
-/* --- SPRACHSICHTBARKEIT --- */
 .i18n {
     display: none;
 }
 .i18n.active {
     display: block;
 }
-/* NEU: Globale Regel für das Vorlese-Highlight */
 .speaking-highlight {
-    background-color: rgba(84, 183, 255, 0.3); /* Nutzt die Primärfarbe mit Transparenz */
+    background-color: rgba(84, 183, 255, 0.3);
     border-radius: 3px;
     transition: background-color 0.3s ease-in-out;
     box-decoration-break: clone;
     -webkit-box-decoration-break: clone;
 }
-/* --- BARRIEREFREIHEITS-FEATURES --- */
+
+/* --- BARRIEREFREIHEITS-FEATURES ... --- */
 body.high-contrast {
-    --background-color: #000000; --text-color: #FFFF00;
-    --primary-color: #00FFFF; --secondary-color: #FFFF00;
-    --light-gray: #1a1a1a; --border-color: #FFFF00;
-    --contact-bg: #000000;
+    --background-color: var(--black-color);
+    --text-color: var(--yellow-color);      
+    --primary-color: #00FFFF;               
+    --secondary-color: var(--yellow-color); 
+    --light-gray: #1a1a1a; 
+    --border-color: var(--yellow-color);
+    --contact-bg: var(--black-color);
     --contact-card-bg: #1a1a1a;
-    --contact-border-color: #FFFF00;
-    --contact-text-color: #FFFF00;
+    --contact-border-color: var(--yellow-color);
+    --contact-text-color: var(--yellow-color);
 }
-body.high-contrast #hero { color: #FFFF00; }
+body.high-contrast #hero { color: var(--yellow-color); }
 body.high-contrast .project-card { box-shadow: 0 0 0 2px var(--primary-color); }
 body.high-contrast .btn { background-color: var(--primary-color); color: #000000; }
 body.high-contrast .speaking-highlight { background-color: rgba(0, 255, 255, 0.3); }
 
 html.text-large { font-size: 115%; }
 html.text-xl { font-size: 130%; }
+
+/* KORREKTUR: Globale Überschriften */
+h1, h2 {
+  text-align: center;
+}
+
+h1 {
+  font-size: 2.5rem; // Wie zuvor
+}
+
+h2 {
+  font-size: 2rem;   // Etwas kleiner als H1, aber größer als Standard
+}
+/* * ENDE DER KORREKTUR
+ */
+
+
+/*
+ * SCROLL SNAPPING DEFINITION (NEUE STRATEGIE)
+ */
+
+/* * 1. DER ANKERPUNKT (.scroll-page)
+ * Ist 100% hoch und darf NIEMALS scrollen.
+ */
+.scroll-page {
+  scroll-snap-align: start; // Einrast-Punkt
+  height: 100%;           // 100% Höhe des <main>-Containers
+  overflow: hidden;         // WICHTIG: Die Seite selbst scrollt NICHT
+}
+
+/* * 2. ZENTRIERTE SEKTIONEN (Hero, Path)
+ * Diese füllen die 100% Höhe aus und zentrieren ihren Inhalt.
+ * Sie dürfen ebenfalls NICHT scrollen.
+ */
+#hero, #path {
+   height: 100%; // 100% statt min-height
+   display: flex;
+   flex-direction: column;
+   justify-content: center;
+   overflow: hidden; // Verhindert, dass sie den Scrollbalken auslösen
+}
+
+/* * 3. NACH OBEN AUSGERICHTETE SEKTIONEN (Skills, Projects, Contact)
+ * Diese Sektionen füllen 100% der Seite und sind INTERN scrollbar,
+ * falls ihr Inhalt zu lang ist.
+ */
+#skills, #projects, #contact {
+    height: 100%; // Füllt die .scroll-page
+    overflow-y: auto; // NUR DIESE Sektionen dürfen scrollen
+    
+    // Passe '80px' an die exakte Höhe deines Headers an!
+    padding-top: 80px; 
+}

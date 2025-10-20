@@ -1,31 +1,62 @@
-<section id="skills">
-    <div class="container">
-        <h2>Meine Fähigkeiten</h2>
-        <div class="skills-grid">
-            <div class="skill-card">
-                <img src="assets/icon/HTML.svg" alt="HTML Icon">
-                <span>HTML5</span>
-            </div>
-            <div class="skill-card">
-                <img src="assets/icon/JavaScript.svg" alt="JavaScript Icon">
-                <span>JavaScript</span>
-            </div>
-             <div class="skill-card">
-                <img src="assets/icon/TypeScript.svg" alt="TypeScript Icon">
-                <span>TypeScript</span>
-            </div>
-            <div class="skill-card">
-                <img src="assets/icon/Angular.svg" alt="Angular Icon">
-                <span>Angular</span>
-            </div>
-            <div class="skill-card">
-                <img src="assets/icon/Firebase.svg" alt="Firebase Icon">
-                <span>Firebase</span>
-            </div>
-             <div class="skill-card">
-                <img src="assets/icon/GIT.svg" alt="GIT Icon">
-                <span>GIT</span>
-            </div>
-            </div>
+<h2>
+  <span class="i18n" lang="de" [class.active]="currentLang === 'de'">Programmiersprachen</span>
+  <span class="i18n" lang="en" [class.active]="currentLang === 'en'">Programming Languages</span>
+  <span class="i18n" lang="es" [class.active]="currentLang === 'es'">Lenguajes de Programación</span>
+</h2>
+<div class="skill-bar-container">
+  
+  <div *ngFor="let skill of programmingLanguages" class="skill-bar-card">
+    
+    <img [src]="skill.imgPath" [alt]="skill.name + ' Icon'" class="skill-bar-icon" *ngIf="skill.imgPath">
+
+    <span class="skill-name">{{ skill.name }}</span>
+    <div class="skill-bar">
+      <div *ngFor="let i of totalSegments" 
+           class="bar-segment"
+           [style.background-color]="i <= getFilledSegments(skill.level) ? getSkillColor(skill.level) : '#e0e0e0'">
+      </div>
     </div>
-</section>
+  </div>
+</div>
+
+<h2>
+  <span class="i18n" lang="de" [class.active]="currentLang === 'de'">Entwicklungsumgebungen</span>
+  <span class="i18n" lang="en" [class.active]="currentLang === 'en'">Development Environments</span>
+  <span class="i18n" lang="es" [class.active]="currentLang === 'es'">Entornos de Desarrollo</span>
+</h2>
+<div class="skill-bar-container">
+  
+  <div *ngFor="let skill of developmentEnvironments" class="skill-bar-card">
+    
+    <img [src]="skill.imgPath" [alt]="skill.name + ' Icon'" class="skill-bar-icon" *ngIf="skill.imgPath">
+    
+    <span class="skill-name">{{ skill.name }}</span>
+    <div class="skill-bar">
+      <div *ngFor="let i of totalSegments" 
+           class="bar-segment"
+           [style.background-color]="i <= getFilledSegments(skill.level) ? getSkillColor(skill.level) : '#e0e0e0'">
+      </div>
+    </div>
+  </div>
+</div>
+
+<h2>
+  <span class="i18n" lang="de" [class.active]="currentLang === 'de'">Weitere Skills</span>
+  <span class="i18n" lang="en" [class.active]="currentLang === 'en'">Other Skills</span>
+  <span class="i18n" lang="es" [class.active]="currentLang === 'es'">Otras Habilidades</span>
+</h2>
+<div class="skill-bar-container">
+  
+  <div *ngFor="let skill of otherSkills" class="skill-bar-card">
+    
+    <img [src]="skill.imgPath" [alt]="skill.name + ' Icon'" class="skill-bar-icon" *ngIf="skill.imgPath">
+
+    <span class="skill-name">{{ skill.name }}</span>
+    <div class="skill-bar">
+      <div *ngFor="let i of totalSegments" 
+           class="bar-segment"
+           [style.background-color]="i <= getFilledSegments(skill.level) ? getSkillColor(skill.level) : '#e0e0e0'">
+      </div>
+    </div>
+  </div>
+</div>

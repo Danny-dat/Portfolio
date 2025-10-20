@@ -1,27 +1,80 @@
-#skills {
-    padding: 60px 0;
-    text-align: center;
+/*
+ * STYLES FÜR DIE NEUEN SKILL-BALKEN
+ */
+
+// Container für die neuen Reihen (ähnlich wie .skills-container)
+.skill-bar-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
+  margin-bottom: 40px; // Abstand zwischen den H2-Reihen
 }
 
-.skills-grid {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 20px;
-    margin-top: 40px;
+// Die neue Skill-Karte
+.skill-bar-card {
+  // Wir nehmen an, dass .skill-card ähnliche Stile hat:
+  background: var(--card-color, #f4f4f4); // Nutzt deine Variable oder Fallback
+  border-radius: 10px;
+  padding: 15px 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+
+  // Wichtig, damit es nicht zu groß wird
+  min-width: 220px; // Mindestbreite
+  max-width: 280px; // Maximalbreite
+  flex-grow: 1;     // Lässt die Karten wachsen
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 15px; // Abstand (gap) leicht vergrößert für das Icon
 }
 
-.skill-card {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 20px;
-    border-radius: 8px;
-    background-color: var(--light-gray);
-    width: 120px;
+/* * STYLING FÜR DAS ICON (innerhalb der Karte)
+ */
+.skill-bar-icon {
+  height: 40px; // Du kannst die Höhe anpassen
+  width: 40px;  // Du kannst die Breite anpassen
+  object-fit: contain; // Verhindert, dass das Icon verzerrt wird
+}
 
-    img {
-        height: 50px;
-        margin-bottom: 15px;
-    }
+.skill-name {
+  font-weight: 600; // Etwas dicker
+  font-size: 1.1rem;
+  color: var(--text-color, #333); // Nutzt deine Textfarbe oder Fallback
+}
+
+// Container für die 6 Segmente
+.skill-bar {
+  display: flex;
+  width: 100%;
+  height: 18px; // Höhe des Balkens
+  gap: 4px;     // Lücke zwischen den Segmenten
+}
+
+// Jedes einzelne Segment
+.bar-segment {
+  flex: 1; // 6 Segmente nehmen den vollen Platz ein
+  border-radius: 3px;
+  
+  // Die Hintergrundfarbe (#e0e0e0 für leer) wird direkt
+  // über [style.background-color] im HTML gesetzt.
+  transition: background-color 0.4s ease;
+}
+
+/* * ANPASSUNG FÜR DEIN i18n-SYSTEM
+ * (Falls du es nicht schon global hast)
+ */
+h2 .i18n {
+  display: none; // Verstecke alle Sprachen
+}
+h2 .i18n.active {
+  display: inline; // Zeige nur die aktive Sprache
+}
+/*
+ * KORREKTUR: Abstand für Überschriften
+ */
+h2 {
+    // Fügt einen Abstand zwischen der H2 und dem .skill-bar-container darunter ein
+    margin-bottom: 30px; 
 }

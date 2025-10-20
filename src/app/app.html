@@ -4,11 +4,25 @@
 </app-header>
 
 <main>
-    <app-hero [currentLang]="currentLang"></app-hero>
-    <app-path [currentLang]="currentLang"></app-path>
-    <app-skills [currentLang]="currentLang"></app-skills>
-    <app-projects [currentLang]="currentLang"></app-projects>
-    <app-contact [currentLang]="currentLang"></app-contact>
+    <div class="scroll-page">
+        <app-hero [currentLang]="currentLang"></app-hero>
+    </div>
+
+    <div class="scroll-page">
+        <app-path [currentLang]="currentLang"></app-path>
+    </div>
+
+    <div class="scroll-page">
+        <app-skills [currentLang]="currentLang"></app-skills>
+    </div>
+
+    <div class="scroll-page">
+        <app-projects [currentLang]="currentLang"></app-projects>
+    </div>
+
+    <div class="scroll-page">
+        <app-contact [currentLang]="currentLang"></app-contact>
+    </div>
 </main>
 
 <app-footer></app-footer>
