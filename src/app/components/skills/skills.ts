@@ -28,7 +28,6 @@ export class SkillsComponent {
     { name: 'JavaScript', level: 85, imgPath: 'assets/icon/JavaScript.svg' },
     { name: 'TypeScript', level: 80, imgPath: 'assets/icon/TypeScript.svg' },
     { name: 'Python', level: 50, imgPath: 'assets/icon/python.svg' },
-    // HIER DIE KORREKTUR für C#:
     { name: 'C#', level: 30, imgPath: 'assets/icon/csharp.svg' }, 
   ];
 
