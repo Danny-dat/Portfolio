@@ -1,0 +1,191 @@
+/* --- Overrides für Dark Mode / High Contrast --- */
+/* Erzwingt einen hellen Hintergrund, selbst wenn body.dark-mode aktiv ist */
+:host {
+  .datenschutz-container {
+    background-color: #ffffff !important;
+    color: #111 !important;
+    box-shadow: 0 10px 35px rgba(0, 0, 0, 0.07) !important;
+  }
+
+  .datenschutz-container h1,
+  .datenschutz-container h2 {
+    color: #4338ca !important;
+  }
+
+  .content {
+    color: #333 !important;
+  }
+
+  .info-box {
+    background: #f9fafb !important;
+    border-color: #e5e7eb !important;
+  }
+
+  .info-box .name {
+    color: #111827 !important;
+  }
+
+  footer {
+    color: #6b7280 !important;
+    border-top-color: #e5e7eb !important;
+  }
+
+  .highlight {
+    color: #dc2626 !important;
+  }
+}
+
+/* --- Stil für den neuen Zurück-Button --- */
+.back-button {
+  display: inline-block;
+  padding: 10px 18px;
+  font-size: 16px !important; // Wichtig, um globale Overrides zu schlagen
+  font-weight: 600;
+  line-height: 1.5 !important; // Wichtig, um globale Overrides zu schlagen
+  color: #4f46e5;
+  background-color: #f9fafb;
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+  
+  // Positionierung
+  position: absolute;
+  top: 25px;
+  left: 30px; // 30px passend zum container padding
+  
+  // Sicherstellen, dass der Text zentriert ist
+  text-align: center !important; 
+
+  &:hover {
+    background-color: #e5e7eb;
+  }
+}
+
+
+/* --- DATENSCHUTZ SEITE --- */
+.datenschutz-container {
+  max-width: 950px;
+  margin: 40px auto;
+  padding: 60px 30px;
+  padding-top: 80px; // Mehr Platz oben für den Button
+  background-color: #ffffff;
+  border-radius: 24px;
+  text-align: justify;
+  font-size: 18px;
+  color: #111;
+  line-height: 1.9;
+  box-shadow: 0 10px 35px rgba(0, 0, 0, 0.07);
+  transition: background-color 0.3s ease, color 0.3s ease;
+  position: relative; // Notwendig für die Positionierung des Buttons
+}
+
+/* TITEL */
+.datenschutz-container h1 {
+  font-size: 2.8rem;
+  font-weight: 800;
+  color: #4f46e5;
+  text-align: center;
+  margin-bottom: 2rem;
+  letter-spacing: 0.5px;
+}
+
+.content {
+  max-width: 850px;
+  margin: 0 auto;
+  font-size: 18px;
+  line-height: 1.9;
+  color: #333;
+  text-align: center; /* <<< NEU: Zentriert alle Kinder, inkl. h2 */
+}
+
+/* UNTERÜBERSCHRIFTEN */
+.content h2 {
+  color: #4338ca;
+  font-size: 1.8rem;
+  font-weight: 700;
+  margin-top: 2.8rem;
+  margin-bottom: 1.2rem;
+  text-align: center;
+  border-bottom: 2px solid #e0e7ff;
+  display: inline-block;
+  padding-bottom: 0.3rem;
+}
+
+/* ABSÄTZE & LISTEN */
+.content p {
+  margin-bottom: 1.4rem;
+  text-align: justify; /* <<< KORREKTUR: Erzwingt Blocksatz für p */
+}
+
+.content ul {
+  list-style: disc;
+  padding-left: 2rem;
+  margin-bottom: 1.6rem;
+  text-align: left; /* <<< KORREKTUR: Erzwingt linksbündig für Listen */
+}
+
+.content li {
+  margin-bottom: 0.6rem;
+}
+
+/* INFO BOX */
+.info-box {
+  display: inline-block;
+  background: #f9fafb;
+  border: 1px solid #e5e7eb;
+  border-radius: 14px;
+  padding: 18px 30px;
+  margin-top: 1rem;
+  margin-bottom: 2rem;
+  line-height: 1.6;
+  text-align: left; /* Text in der Box bleibt linksbündig */
+  transition: background-color 0.3s ease;
+}
+
+.info-box:hover {
+  background: #f3f4f6;
+}
+
+.info-box .name {
+  font-weight: 600;
+  font-size: 1.2rem;
+  color: #111827;
+}
+
+.highlight {
+  color: #dc2626;
+  font-weight: 600;
+}
+
+.highlight-text {
+  color: #1e3a8a;
+  font-weight: 600;
+}
+
+.bold {
+  font-weight: 700;
+}
+
+
+
+@keyframes fadeInText {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* --- FOOTER --- */
+footer {
+  margin-top: 3rem;
+  font-size: 0.95rem;
+  color: #6b7280;
+  text-align: center;
+  border-top: 1px solid #e5e7eb;
+  padding-top: 1.2rem;
+}

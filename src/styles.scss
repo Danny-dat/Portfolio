@@ -10,8 +10,8 @@
 /* --- GRUNDEINSTELLUNGEN & DESIGN-SYSTEM (ANGEPASST AN PDF-FEEDBACK) --- */
 :root {
     --primary-color: #54B7FF;      /* Blau aus PDF */
-    --yellow-color: #E6BA25;       /* Gelb aus PDF */
-    --black-color: #232725;         /* Schwarz aus PDF */
+    --yellow-color: #E6BA25;      /* Gelb aus PDF */
+    --black-color: #232725;        /* Schwarz aus PDF */
     
     --background-color: #FFFFFF;
     --text-color: var(--black-color);
@@ -75,15 +75,15 @@ body {
     background-color: rgba(84, 183, 255, 0.3);
     border-radius: 3px;
     transition: background-color 0.3s ease-in-out;
-    box-decoration-break: clone;
     -webkit-box-decoration-break: clone;
+    box-decoration-break: clone;
 }
 
 /* --- BARRIEREFREIHEITS-FEATURES ... --- */
 body.high-contrast {
     --background-color: var(--black-color);
     --text-color: var(--yellow-color);      
-    --primary-color: #00FFFF;               
+    --primary-color: #00FFFF;              
     --secondary-color: var(--yellow-color); 
     --light-gray: #1a1a1a; 
     --border-color: var(--yellow-color);
@@ -151,4 +151,82 @@ h2 {
     
     // Passe '80px' an die exakte Höhe deines Headers an!
     padding-top: 80px; 
+}
+// Stellen Sie sicher, dass html und body die volle Höhe einnehmen
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+// Die app-root Komponente als Flex-Container definieren
+app-root {
+  display: flex;
+  flex-direction: column; // Elemente vertikal anordnen (Header, Inhalt, Footer)
+  min-height: 100vh; // MindesthSöhe = Viewport-Höhe
+}
+/* Standard: Scroll wieder erlauben in statischen Seiten wie Impressum/Datenschutz */
+app-datenschutz, app-impressum {
+  overflow-y: auto !important;
+  height: auto !important;
+  display: block !important;
+}
+app-root {
+  overflow-y: auto !important;
+}
+/* Füge diese Korrektur in styles.scss hinzu (falls noch nicht geschehen), 
+ * um die globale 'overflow: hidden' von 'html' und 'body' zu überstimmen.
+ */
+app-datenschutz {
+  /* Stellt sicher, dass die Datenschutz-Komponente den Inhalt anzeigt */
+  display: block; 
+  /* Nimmt die volle Breite und Höhe des Hauptcontainers ein */
+  min-height: 100vh;
+  width: 100%;
+
+  /* Erlaubt der Seite, normal zu scrollen, was die Haupt-Scroll-Blockade aufhebt */
+  /* Dies ist entscheidend, wenn app-root oder andere Eltern-Container das Scrollen noch blockieren */
+  overflow-y: auto !important; 
+  overflow-x: hidden !important;
+}
+
+/* Du hast auch diese Zeile in styles.scss, sie ist wichtig, aber app-datenschutz 
+ * muss auch die Höhe richtig verwalten:
+ */
+app-root {
+  overflow-y: auto !important;
+}
+
+/* --- REGEL AKTUALISIERT --- */
+/*
+ * Globale UI ausblenden, wenn Impressum oder Datenschutz aktiv sind.
+ *
+ * Verwendet :has(), um zu prüfen, ob app-impressum oder app-datenschutz
+ * Kinder von app-root sind.
+ */
+app-root:has(app-impressum),
+app-root:has(app-datenschutz) {
+
+  /* Blendet das Barrierefreiheits-Menü (das Panel) aus */
+  .accessibility-menu {
+    display: none !important;
+  }
+
+  /* * Blendet die Header-Steuerung aus.
+   * HINWEIS: Bitte '.header-controls' durch den exakten Selektor 
+   * deines Headers ersetzen (z.B. 'app-header', '.main-nav' etc.),
+   * falls dieser Platzhalter nicht korrekt ist.
+   */
+  .header-controls {
+    display: none !important;
+  }
+
+  /* * Blendet den Button für Barrierefreiheit aus (der das Icon enthält).
+   * Wir zielen auf das Bild UND seinen übergeordneten Button/Link.
+   */
+  img[src="assets/icon/barrierefreiheit.svg"],
+  button:has(img[src="assets/icon/barrierefreiheit.svg"]),
+  a:has(img[src="assets/icon/barrierefreiheit.svg"]) {
+    display: none !important;
+  }
 }

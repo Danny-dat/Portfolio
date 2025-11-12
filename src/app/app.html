@@ -4,25 +4,7 @@
 </app-header>
 
 <main>
-    <div class="scroll-page">
-        <app-hero [currentLang]="currentLang"></app-hero>
-    </div>
-
-    <div class="scroll-page">
-        <app-path [currentLang]="currentLang"></app-path>
-    </div>
-
-    <div class="scroll-page">
-        <app-skills [currentLang]="currentLang"></app-skills>
-    </div>
-
-    <div class="scroll-page">
-        <app-projects [currentLang]="currentLang"></app-projects>
-    </div>
-
-    <div class="scroll-page">
-        <app-contact [currentLang]="currentLang"></app-contact>
-    </div>
+    <router-outlet></router-outlet>
 </main>
 
 <app-footer></app-footer>
