@@ -1,26 +1,96 @@
 /* --- HERO SEKTION --- */
 :host {
     display: block;
-    height: 100vh; /* Sorgt dafür, dass die Komponente die volle Höhe einnimmt */
+    height: 100vh; /* = ganze Bildschirmhöhe */
+    overflow: hidden; /* verhindert inneres Scrollen */
+}
+.hero-content {
+    overflow: visible;
 }
 
-#hero {
-    display: flex; align-items: center; justify-content: center;
-    text-align: center; position: relative; color: white;
-    height: 100%; /* Wichtig, damit es die Höhe von :host übernimmt */
+/* Übergeordneter Container */
+:host #hero {
+    display: flex !important; 
+    flex-direction: row !important;
+    align-items: center !important;
+    justify-content: center !important;
+    text-align: center;
+    position: relative; 
+    color: white;
+    height: 100%; 
     width: 100%;
-    background-image: url('/assets/img/Background.png'); /* <<< HIER IST DIE KORREKTUR */
+    background-image: url('/assets/img/Background.png'); 
     background-size: cover;
-    background-position: center; background-repeat: no-repeat;
+    background-position: center; 
+    background-repeat: no-repeat;
+   
 }
+
 #hero::before {
-    content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0;
-    background: rgba(0, 0, 0, 0.5); z-index: 1;
+    content: ''; 
+    position: absolute; 
+    inset: 0;
+    background: rgba(0, 0, 0, 0.5); 
+    z-index: 1;
 }
-.hero-content { position: relative; z-index: 2; }
-.hero-content .profile-pic-placeholder {
-    width: 150px; height: 150px; background-color: var(--primary-color); border-radius: 50%;
-    margin: 0 auto 20px auto; border: 5px solid rgba(255,255,255,0.8);
-    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+
+/* Inhalt */
+.hero-content { 
+    position: relative;
+    z-index: 2; 
 }
-.hero-content p { font-size: 1.2rem; margin-bottom: 30px; }
+
+/* --- PROFILBILD-CONTAINER --- */
+.hero-content .profile-image-wrapper {
+    position: absolute;
+    top: -350px; /* realistisch: knapp über der Überschrift */
+    left: 65%;
+    width: clamp(180px, 18vw, 220px);
+    aspect-ratio: 2 / 3;
+    overflow: hidden;
+    border-radius: 0;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.25);
+    z-index: 3;
+}
+
+/* --- BILD SELBST --- */
+.hero-content .profile-image-wrapper img {
+    width: 100%;
+    height: 100%;
+    display: block;
+    object-fit: cover;   /* füllt Container perfekt aus */
+    image-rendering: crisp-edges;
+    image-rendering: -webkit-optimize-contrast;
+    transform: none;
+}
+
+/* --- TEXT --- */
+.hero-content h1 {
+    margin-bottom: 0.5rem; 
+    text-align: center;
+    line-height: 1.3;
+}
+
+.hero-content p { 
+    font-size: 1.2rem; 
+    margin-bottom: 30px; 
+    text-align: center;
+}
+
+/* --- RESPONSIVE --- */
+@media (max-width: 900px) {
+    .hero-content .profile-image-wrapper {
+        position: static;
+        margin: 0 auto 1.5rem auto;
+        width: clamp(150px, 25vw, 200px);
+        aspect-ratio: 2 / 3;
+    }
+
+    .hero-content h1 {
+        font-size: 1.8rem;
+    }
+
+    .hero-content p {
+        font-size: 1rem;
+    }
+}

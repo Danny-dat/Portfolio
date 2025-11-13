@@ -12,14 +12,5 @@ export class LanguageService {
   // Es wird mit 'de' (Deutsch) initialisiert.
   public readonly activeLanguage = signal<LanguageCode>('de');
 
-  /**
-   * Ändert die globale aktive Sprache.
-   * Komponenten im Template verwenden dieses Signal, um die Anzeige umzuschalten.
-   * @param lang Das neue Sprachkürzel ('de', 'en', 'es').
-   */
-  setLanguage(lang: LanguageCode): void {
-    this.activeLanguage.set(lang);
-    // Wenn Sie Persistenz wünschen, können Sie hier localStorage verwenden:
-    // localStorage.setItem('appLang', lang); 
-  }
+
 }

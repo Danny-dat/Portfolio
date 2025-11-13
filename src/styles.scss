@@ -1,232 +1,245 @@
-/* --- SCHRIFTART DEFINIEREN (für variable Schriftart) --- */
+/* --- SCHRIFTART DEFINIEREN --- */
 @font-face {
-  font-family: 'Roboto Flex';
-  src: url('assets/fonts/RobotoFlex-Variable.ttf') format('truetype-variations');
-  font-weight: 100 1000;
-  font-style: normal;
-  font-display: swap;
+ font-family: 'Roboto Flex';
+ src: url('assets/fonts/RobotoFlex-Variable.ttf') format('truetype-variations');
+ font-weight: 100 1000;
+ font-style: normal;
+ font-display: swap;
 }
 
-/* --- GRUNDEINSTELLUNGEN & DESIGN-SYSTEM (ANGEPASST AN PDF-FEEDBACK) --- */
+/* --- DESIGN SYSTEM --- */
 :root {
-    --primary-color: #54B7FF;      /* Blau aus PDF */
-    --yellow-color: #E6BA25;      /* Gelb aus PDF */
-    --black-color: #232725;        /* Schwarz aus PDF */
-    
-    --background-color: #FFFFFF;
-    --text-color: var(--black-color);
-    --light-gray: #F8F9FA;
-    --border-color: #DEE2E6;
+ --primary-color: #54B7FF;
+ --yellow-color: #E6BA25;
+ --black-color: #232725;
 
-    --contact-bg: var(--black-color);
-    --contact-card-bg: #2B3035;
-    --contact-border-color: #495057;
-    --contact-text-color: #E9ECEF;
+ --background-color: #FFFFFF;
+ --text-color: var(--black-color);
+ --light-gray: #F8F9FA;
+ --border-color: #DEE2E6;
 
-    --font-family: 'Roboto Flex', 'Helvetica Neue', Arial, sans-serif;
+ --contact-bg: var(--black-color);
+ --contact-card-bg: #2B3035;
+ --contact-border-color: #495057;
+ --contact-text-color: #E9ECEF;
+
+ --font-family: 'Roboto Flex', 'Helvetica Neue', Arial, sans-serif;
 }
 
+/* --- DARK MODE --- */
 body.dark-mode {
-    --background-color: #121212;
-    --text-color: #E9ECEF;
-    --light-gray: #1C1C1C;
-    --border-color: #495057;
-    --contact-bg: #121212;
-    --contact-card-bg: #1C1C1C;
+--background-color: #121212;
+ --text-color: #E9ECEF;
+ --light-gray: #1C1C1C;
+ --border-color: #495057;
+ --contact-bg: #121212;
+ --contact-card-bg: #1C1C1C;
 }
 
+/* --- RESET --- */
 *, *::before, *::after {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
+ box-sizing: border-box;
+ margin: 0;
+ padding: 0;
 }
 
-/* * KORREKTUR FÜR ÄUSSEREN SCROLLBALKEN
- * Wir sperren html und body komplett.
- */
+/* --- BODY / BASIS --- */
 html, body {
-    height: 100%;
-    overflow: hidden; // Verhindert ALLES Scrollen (x und y)
-    position: relative; 
+height: 100%;
+ margin: 0;
+ padding: 0;
+ overflow-x: hidden;
+ overflow-y: auto;     
+ scroll-behavior: smooth;
+ scroll-snap-type: y mandatory;
 }
 
 body {
-    font-family: var(--font-family);
-    color: var(--text-color);
-    background-color: var(--background-color);
-    line-height: 1.6;
-    transition: background-color 0.3s, color 0.3s;
+ font-family: var(--font-family);
+ color: var(--text-color);
+ background-color: var(--background-color);
+ line-height: 1.6;
+ transition: background-color 0.3s, color 0.3s;
 }
-/* * ENDE DER KORREKTUR
- */
 
-.container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 20px;
+/* --- TYPO --- */
+h1, h2 {
+ text-align: center;
 }
-.i18n {
-    display: none;
-}
-.i18n.active {
-    display: block;
-}
+h1 { font-size: 2.5rem; }
+h2 { font-size: 2rem; }
+
+/* --- LESBARKEITSHIGHLIGHT (TTS) --- */
 .speaking-highlight {
-    background-color: rgba(84, 183, 255, 0.3);
-    border-radius: 3px;
-    transition: background-color 0.3s ease-in-out;
-    -webkit-box-decoration-break: clone;
-    box-decoration-break: clone;
+ background-color: rgba(84, 183, 255, 0.3);
+ border-radius: 3px;
+ transition: background-color 0.3s ease-in-out;
+ -webkit-box-decoration-break: clone;
+box-decoration-break: clone;
 }
 
-/* --- BARRIEREFREIHEITS-FEATURES ... --- */
+/* --- BARRIEREFREIHEITSMODI --- */
 body.high-contrast {
-    --background-color: var(--black-color);
-    --text-color: var(--yellow-color);      
-    --primary-color: #00FFFF;              
-    --secondary-color: var(--yellow-color); 
-    --light-gray: #1a1a1a; 
-    --border-color: var(--yellow-color);
-    --contact-bg: var(--black-color);
-    --contact-card-bg: #1a1a1a;
-    --contact-border-color: var(--yellow-color);
-    --contact-text-color: var(--yellow-color);
+ --background-color: var(--black-color);
+ --text-color: var(--yellow-color);
+ --primary-color: #00FFFF;
+ --secondary-color: var(--yellow-color);
+ --light-gray: #1a1a1a;
+ --border-color: var(--yellow-color);
+ --contact-bg: var(--black-color);
+ --contact-card-bg: #1a1a1a;
+ --contact-border-color: var(--yellow-color);
+ --contact-text-color: var(--yellow-color);
 }
 body.high-contrast #hero { color: var(--yellow-color); }
 body.high-contrast .project-card { box-shadow: 0 0 0 2px var(--primary-color); }
 body.high-contrast .btn { background-color: var(--primary-color); color: #000000; }
 body.high-contrast .speaking-highlight { background-color: rgba(0, 255, 255, 0.3); }
 
+/* --- SCHRIFTGRÖSSE --- */
 html.text-large { font-size: 115%; }
-html.text-xl { font-size: 130%; }
+html.text-xl   { font-size: 130%; }
 
-/* KORREKTUR: Globale Überschriften */
-h1, h2 {
-  text-align: center;
+/* =========================================================
+   🧭 APP-STRUKTUR & SCROLL-VERHALTEN
+   ========================================================= */
+
+/* App-Komponenten-Hierarchie */
+app-root {
+ display: flex;
+ flex-direction: column;
+ min-height: 100vh;
+ overflow: visible !important; /* kein eigener Scrollkontext */
 }
 
-h1 {
-  font-size: 2.5rem; // Wie zuvor
+app-header,
+app-footer {
+ flex-shrink: 0;
+ z-index: 10;
+ position: relative;
 }
 
-h2 {
-  font-size: 2rem;   // Etwas kleiner als H1, aber größer als Standard
+/* Footer immer sichtbar am unteren Rand */
+app-footer {
+ position: fixed;
+ bottom: 0;
+left: 0;
+ width: 100%;
+z-index: 20;
+ background: var(--background-color);
+box-shadow: 0 -2px 6px rgba(0,0,0,0.1);
 }
-/* * ENDE DER KORREKTUR
- */
 
+main {
+ flex: 1;
+ display: block;
+ overflow: visible !important; /* verhindert internen Scrollbalken */
+padding-bottom: 100px;    /* Platz für fixen Footer */
+}
 
-/*
- * SCROLL SNAPPING DEFINITION (NEUE STRATEGIE)
- */
-
-/* * 1. DER ANKERPUNKT (.scroll-page)
- * Ist 100% hoch und darf NIEMALS scrollen.
- */
+/* --- SCROLL-ABSCHNITTE --- */
 .scroll-page {
-  scroll-snap-align: start; // Einrast-Punkt
-  height: 100%;           // 100% Höhe des <main>-Containers
-  overflow: hidden;         // WICHTIG: Die Seite selbst scrollt NICHT
+ scroll-snap-align: start;
+ min-height: 100vh;      /* mindestens Viewport-Höhe */
+ display: flex;
+ flex-direction: column;
+ justify-content: flex-start; /* natürlicher Fluss */
+ align-items: stretch;
+ overflow: visible;     /* nichts wegschneiden */
 }
 
-/* * 2. ZENTRIERTE SEKTIONEN (Hero, Path)
- * Diese füllen die 100% Höhe aus und zentrieren ihren Inhalt.
- * Sie dürfen ebenfalls NICHT scrollen.
- */
-#hero, #path {
-   height: 100%; // 100% statt min-height
-   display: flex;
-   flex-direction: column;
-   justify-content: center;
-   overflow: hidden; // Verhindert, dass sie den Scrollbalken auslösen
+#hero.scroll-page {
+ justify-content: center;  /* Hero bleibt zentriert */
+ align-items: center;
+ height: 100vh;
+ overflow: hidden;
 }
 
-/* * 3. NACH OBEN AUSGERICHTETE SEKTIONEN (Skills, Projects, Contact)
- * Diese Sektionen füllen 100% der Seite und sind INTERN scrollbar,
- * falls ihr Inhalt zu lang ist.
- */
-#skills, #projects, #contact {
-    height: 100%; // Füllt die .scroll-page
-    overflow-y: auto; // NUR DIESE Sektionen dürfen scrollen
-    
-    // Passe '80px' an die exakte Höhe deines Headers an!
-    padding-top: 80px; 
-}
-// Stellen Sie sicher, dass html und body die volle Höhe einnehmen
-html, body {
-  height: 100%;
-  margin: 0;
-  padding: 0;
+/* --- SEKTIONS-STANDARD --- */
+#hero, #path, #skills, #projects, #contact {
+ min-height: 100vh;
+ width: 100%;
+ position: relative;
+ z-index: 1;
 }
 
-// Die app-root Komponente als Flex-Container definieren
-app-root {
-  display: flex;
-  flex-direction: column; // Elemente vertikal anordnen (Header, Inhalt, Footer)
-  min-height: 100vh; // MindesthSöhe = Viewport-Höhe
+#path   { overflow: visible; }
+#projects {
+ display: flex;
+ flex-direction: column;
+ align-items: flex-start;   /* Projekte linksbündig */
+ justify-content: flex-start;
 }
-/* Standard: Scroll wieder erlauben in statischen Seiten wie Impressum/Datenschutz */
-app-datenschutz, app-impressum {
-  overflow-y: auto !important;
-  height: auto !important;
-  display: block !important;
+
+/* --- SICHERHEIT FÜR ANGULAR ROUTER (gegen Shadow-Wrapper) --- */
+:host-context(router-outlet) > div {
+ overflow: visible !important;
+ height: auto !important;
 }
-app-root {
-  overflow-y: auto !important;
-}
-/* Füge diese Korrektur in styles.scss hinzu (falls noch nicht geschehen), 
- * um die globale 'overflow: hidden' von 'html' und 'body' zu überstimmen.
- */
+
+/* --- SPEZIALSEITEN MIT EIGENEM SCROLL --- */
+app-impressum,
 app-datenschutz {
-  /* Stellt sicher, dass die Datenschutz-Komponente den Inhalt anzeigt */
-  display: block; 
-  /* Nimmt die volle Breite und Höhe des Hauptcontainers ein */
-  min-height: 100vh;
-  width: 100%;
-
-  /* Erlaubt der Seite, normal zu scrollen, was die Haupt-Scroll-Blockade aufhebt */
-  /* Dies ist entscheidend, wenn app-root oder andere Eltern-Container das Scrollen noch blockieren */
-  overflow-y: auto !important; 
-  overflow-x: hidden !important;
+ display: block !important;
+ min-height: 100vh;
+ width: 100%;
+ overflow-y: auto !important;
+ overflow-x: hidden !important;
 }
 
-/* Du hast auch diese Zeile in styles.scss, sie ist wichtig, aber app-datenschutz 
- * muss auch die Höhe richtig verwalten:
- */
-app-root {
-  overflow-y: auto !important;
-}
-
-/* --- REGEL AKTUALISIERT --- */
-/*
- * Globale UI ausblenden, wenn Impressum oder Datenschutz aktiv sind.
- *
- * Verwendet :has(), um zu prüfen, ob app-impressum oder app-datenschutz
- * Kinder von app-root sind.
- */
+/* --- UI AUSBLENDEN BEI SPEZIALSEITEN --- */
 app-root:has(app-impressum),
 app-root:has(app-datenschutz) {
+ .accessibility-menu,
+ .header-controls,
+ img[src="assets/icon/barrierefreiheit.svg"],
+ button:has(img[src="assets/icon/barrierefreiheit.svg"]),
+ a:has(img[src="assets/icon/barrierefreiheit.svg"]) {
+  display: none !important;
+ }
+}
 
-  /* Blendet das Barrierefreiheits-Menü (das Panel) aus */
-  .accessibility-menu {
-    display: none !important;
-  }
+/* --- SCROLL-SMOOTH-FALLBACK --- */
+@supports (scroll-behavior: smooth) {
+ html { scroll-behavior: smooth; }
+}
 
-  /* * Blendet die Header-Steuerung aus.
-   * HINWEIS: Bitte '.header-controls' durch den exakten Selektor 
-   * deines Headers ersetzen (z.B. 'app-header', '.main-nav' etc.),
-   * falls dieser Platzhalter nicht korrekt ist.
-   */
-  .header-controls {
-    display: none !important;
-  }
+/* =========================================================
+d   ✅ I18N – KORRIGIERTE FUNKTIONSWEISE
+   ========================================================= */
 
-  /* * Blendet den Button für Barrierefreiheit aus (der das Icon enthält).
-   * Wir zielen auf das Bild UND seinen übergeordneten Button/Link.
-   */
-  img[src="assets/icon/barrierefreiheit.svg"],
-  button:has(img[src="assets/icon/barrierefreiheit.svg"]),
-  a:has(img[src="assets/icon/barrierefreiheit.svg"]) {
-    display: none !important;
-  }
+/* --- SPRACHUMSCHALTUNG (I18N) – KORRIGIERTE VERSION --- */
+.i18n {
+ display: none !important;
+ visibility: hidden;
+}
+.i18n.active {
+  /*
+    KORREKTUR: Geändert von 'block' zu 'flex'.
+    GRUND: Das neue 'styles.scss' verwendet intensiv Flexbox.
+    'display: block !important' hat wahrscheinlich das
+    neue Flex-Layout (z.B. von .scroll-page oder .hero-content)
+    gebrochen. 'display: flex' ist eine sicherere Annahme für
+    moderne Layouts, oft werden h1/p selbst zu Flex-Containern
+    gemacht, um Inhalt zu zentrieren.
+  */
+ display: flex !important;
+ visibility: visible;
+  /*
+    ZUSATZ-TIPP: Wenn 'flex' nicht funktioniert,
+    versuche es mit 'initial' oder 'inherit'.
+    Wenn 'flex' das Layout der H1 (z.B. Textausrichtung)
+    kaputt macht, füge dies hinzu:
+  */
+  flex-direction: column;
+  align-items: center; /* Oder 'flex-start' / 'stretch' */
+}
+
+.i18n-inline {
+  display: none !important;
+ visibility: hidden;
+}
+.i18n-inline.active {
+ display: inline !important; /* 'inline' ist hier meistens noch korrekt */
+ visibility: visible;
 }
