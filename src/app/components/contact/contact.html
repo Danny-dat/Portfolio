@@ -1,28 +1,32 @@
 <section id="contact" class="snap-section">
-            <h2>
-          <span class="i18n" lang="de" [class.active]="currentLang === 'de'">Nehmen Sie Kontakt auf</span>
-          <span class="i18n" lang="en" [class.active]="currentLang === 'en'">Get in Touch</span>
-          <span class="i18n" lang="es" [class.active]="currentLang === 'es'">Póngase en Contacto</span>
-        </h2>
+         <h2>
+       <!-- [class.active] entfernt, 'active' zu 'de' hinzugefügt -->
+      <span class="i18n active" lang="de">Nehmen Sie Kontakt auf</span>
+      <span class="i18n" lang="en">Get in Touch</span>
+      <span class="i18n" lang="es">Póngase en Contacto</span>
+    </h2>
     <div class="contact-columns-container">
 
         <div class="contact-info-col">
             <div class="contact-card-wrapper">
-                <h2 class="i18n" lang="de" [class.active]="currentLang === 'de'">Kontakt & Profile</h2>
-                <h2 class="i18n" lang="en" [class.active]="currentLang === 'en'">Contact & Profiles</h2>
-                <h2 class="i18n" lang="es" [class.active]="currentLang === 'es'">Contacto y Perfiles</h2>
+                <!-- [class.active] entfernt, 'active' zu 'de' hinzugefügt -->
+                <h2 class="i18n active" lang="de">Kontakt & Profile</h2>
+                <h2 class="i18n" lang="en">Contact & Profiles</h2>
+                <h2 class="i18n" lang="es">Contacto y Perfiles</h2>
                 
                 <div class="card-content-wrapper">
-                    <p class="contact-intro i18n" lang="de" [class.active]="currentLang === 'de'">Ich freue mich darauf, von Ihnen zu hören. Ob Projektanfrage, Feedback oder Networking – hier finden Sie alle Wege, mich zu erreichen.</p>
-                    <p class="contact-intro i18n" lang="en" [class.active]="currentLang === 'en'">I look forward to hearing from you. Whether for a project inquiry, feedback, or networking – here are all the ways to reach me.</p>
-                    <p class="contact-intro i18n" lang="es" [class.active]="currentLang === 'es'">Espero con interés saber de usted. Ya sea para una consulta de proyecto, comentarios o networking, aquí encontrará todas las formas de contactarme.</p>
+                    <!-- [class.active] entfernt, 'active' zu 'de' hinzugefügt -->
+                    <p class="contact-intro i18n active" lang="de">Ich freue mich darauf, von Ihnen zu hören. Ob Projektanfrage, Feedback oder Networking – hier finden Sie alle Wege, mich zu erreichen.</p>
+                    <p class="contact-intro i18n" lang="en">I look forward to hearing from you. Whether for a project inquiry, feedback, or networking – here are all the ways to reach me.</p>
+                    <p class="contact-intro i18n" lang="es">Espero con interés saber de usted. Ya sea para una consulta de proyecto, comentarios o networking, aquí encontrará todas las formas de contactarme.</p>
                     <ul>
                         <li><i class="fa-solid fa-envelope"></i><a href="mailto:deine-email@beispiel.com">deine-email@beispiel.com</a></li>
                         <li>
                             <i class="fa-solid fa-location-dot"></i>
-                            <span class="i18n" lang="de" [class.active]="currentLang === 'de'">Standort: Datteln, Deutschland</span>
-                            <span class="i18n" lang="en" [class.active]="currentLang === 'en'">Location: Datteln, Germany</span>
-                            <span class="i18n" lang="es" [class.active]="currentLang === 'es'">Ubicación: Datteln, Alemania</span>
+                            <!-- [class.active] entfernt, 'active' zu 'de' hinzugefügt -->
+                            <span class="i18n active" lang="de">Standort: Datteln, Deutschland</span>
+                            <span class="i18n" lang="en">Location: Datteln, Germany</span>
+                            <span class="i18n" lang="es">Ubicación: Datteln, Alemania</span>
                         </li>
                     </ul>
                     <div class="social-links">
@@ -33,27 +37,30 @@
                 </div>
 
                 <a href="assets/pdf/lebenslauf.pdf" download class="btn">
-                    <span class="i18n" lang="de" [class.active]="currentLang === 'de'">Lebenslauf als PDF</span>
-                    <span class="i18n" lang="en" [class.active]="currentLang === 'en'">CV as PDF</span>
-                    <span class="i18n" lang="es" [class.active]="currentLang === 'es'">CV en PDF</span>
+                    <!-- [class.active] entfernt, 'active' zu 'de' hinzugefügt -->
+                    <span class="i18n active" lang="de">Lebenslauf als PDF</span>
+                    <span class="i18n" lang="en">CV as PDF</span>
+                    <span class="i18n" lang="es">CV en PDF</span>
                 </a>
             </div>
         </div>
 
         <div class="contact-form-col">
             <div class="contact-card-wrapper">
-                <h2 class="i18n" lang="de" [class.active]="currentLang === 'de'">Schreiben Sie mir eine Nachricht</h2>
-                <h2 class="i18n" lang="en" [class.active]="currentLang === 'en'">Send Me a Message</h2>
-                <h2 class="i18n" lang="es" [class.active]="currentLang === 'es'">Enviar un Mensaje</h2>
+                <!-- [class.active] entfernt, 'active' zu 'de' hinzugefügt -->
+                <h2 class="i18n active" lang="de">Schreiben Sie mir eine Nachricht</h2>
+                <h2 class="i18n" lang="en">Send Me a Message</h2>
+                <h2 class="i18n" lang="es">Enviar un Mensaje</h2>
 
                 <form action="https://formspree.io/f/meolvepq" method="POST">
                     <input type="email" name="email" placeholder="Ihre E-Mail" required>
                     <textarea name="message" rows="5" placeholder="Ihre Nachricht" required></textarea>
                     
                     <button type="submit" class="btn">
-                        <span class="i18n" lang="de" [class.active]="currentLang === 'de'">Senden</span>
-                        <span class="i18n" lang="en" [class.active]="currentLang === 'en'">Send</span>
-                        <span class="i18n" lang="es" [class.active]="currentLang === 'es'">Enviar</span>
+                        <!-- [class.active] entfernt, 'active' zu 'de' hinzugefügt -->
+                        <span class="i18n active" lang="de">Senden</span>
+                        <span class="i18n" lang="en">Send</span>
+                        <span class="i18n" lang="es">Enviar</span>
                     </button>
                 </form>
             </div>

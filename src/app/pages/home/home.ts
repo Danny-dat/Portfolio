@@ -1,7 +1,7 @@
 import { Component, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-// Ihre bestehenden Inhaltskomponenten
+// Komponenten-Imports
 import { HeroComponent } from '../../components/hero/hero';
 import { PathComponent } from '../../components/path/path';
 import { SkillsComponent } from '../../components/skills/skills';
@@ -19,17 +19,17 @@ import { ContactComponent } from '../../components/contact/contact';
     ProjectsComponent,
     ContactComponent
   ],
+  // WICHTIG: Das Template wurde bereinigt
   template: `
-    <main>
-      <app-hero [currentLang]="currentLang"></app-hero>
-      <app-path [currentLang]="currentLang"></app-path>
-      <app-skills [currentLang]="currentLang"></app-skills>
-      <app-projects [currentLang]="currentLang"></app-projects>
-      <app-contact [currentLang]="currentLang"></app-contact>
-    </main>
-  `,
-  styleUrls: ['../../app.scss'] // Verwenden Sie Ihre Haupt-Styles oder erstellen Sie neue
+    <!-- ALLE [currentLang]-Bindungen wurden entfernt -->
+    <app-hero></app-hero>
+    <app-path></app-path>
+    <app-skills></app-skills>
+    <app-projects></app-projects>
+    <app-contact></app-contact> 
+  `
 })
 export class HomeComponent {
-  @Input() currentLang: string = 'de';
+  // Die alte 'currentLang'-Logik wurde entfernt, da sie nicht mehr benötigt wird.
+  // Jede Komponente holt sich die Sprache jetzt selbst vom LanguageService.
 }

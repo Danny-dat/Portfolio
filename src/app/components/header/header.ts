@@ -1,5 +1,6 @@
-import { Component, Input, Output, EventEmitter, Inject, PLATFORM_ID, AfterViewInit } from '@angular/core';
+import { Component, Inject, PLATFORM_ID, AfterViewInit, Signal } from '@angular/core';
 import { CommonModule, isPlatformBrowser } from '@angular/common';
+import { LanguageService, LanguageCode } from '../../language.service'; // Importieren
 
 @Component({
   selector: 'app-header',
@@ -9,30 +10,34 @@ import { CommonModule, isPlatformBrowser } from '@angular/common';
   styleUrls: ['./header.scss']
 })
 export class HeaderComponent implements AfterViewInit {
-  @Input() currentLang: string = 'de';
-  @Output() languageChanged = new EventEmitter<string>();
+  // @Input und @Output sind entfernt
 
   private currentlyHighlightedElement: HTMLElement | null = null;
   public isBrowser: boolean;
+  public readonly currentLang: Signal<LanguageCode>; // Ist jetzt ein Signal
 
-  // Wir "injizieren" die PLATFORM_ID, um herauszufinden, wo der Code läuft.
-  constructor(@Inject(PLATFORM_ID) private platformId: Object) {
+  constructor(
+    @Inject(PLATFORM_ID) private platformId: Object,
+    public languageService: LanguageService // Service injizieren
+  ) {
     this.isBrowser = isPlatformBrowser(this.platformId);
+    // Signal direkt vom Service übernehmen
+    this.currentLang = this.languageService.activeLanguage;
   }
   
-  // ngAfterViewInit wird aufgerufen, nachdem die Komponente im Browser initialisiert wurde.
-  // Das ist der beste Ort für DOM-Interaktionen wie Event Listener.
   ngAfterViewInit(): void {
     if (this.isBrowser) {
-      // Dieser Code läuft jetzt sicher nur im Browser.
       window.addEventListener('beforeunload', () => {
         speechSynthesis.cancel();
       });
     }
   }
 
-  switchLang(lang: string) {
-    this.languageChanged.emit(lang);
+  // Diese Methode ändert jetzt das Signal im Service
+  switchLang(lang: LanguageCode) {
+    console.log('Wechsle Sprache zu:', lang);
+    this.languageService.activeLanguage.set(lang);
+    console.log('Neuer aktiver Wert:', this.currentLang());
   }
 
   isDarkMode = false;
@@ -60,7 +65,6 @@ export class HeaderComponent implements AfterViewInit {
   }
 
   speakContent() {
-    // Die gesamte Funktion wird nur im Browser ausgeführt.
     if (this.isBrowser) {
       if (!('speechSynthesis' in window)) {
         console.error('Die Sprachausgabe wird von diesem Browser nicht unterstützt.');
@@ -87,7 +91,9 @@ export class HeaderComponent implements AfterViewInit {
         const text = element.innerText;
         if (text && text.trim().length > 0) {
           const utterance = new SpeechSynthesisUtterance(text);
-          const voices = speechSynthesis.getVoices().filter(v => v.lang.startsWith(this.currentLang));
+          
+          // KORREKTUR HIER: this.currentLang() mit Klammern aufrufen
+          const voices = speechSynthesis.getVoices().filter(v => v.lang.startsWith(this.currentLang()));
           utterance.voice = voices[0] || null;
 
           utterance.onstart = () => {

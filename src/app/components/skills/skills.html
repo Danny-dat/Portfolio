@@ -1,7 +1,8 @@
 <h2>
-  <span class="i18n" lang="de" [class.active]="currentLang === 'de'">Programmiersprachen</span>
-  <span class="i18n" lang="en" [class.active]="currentLang === 'en'">Programming Languages</span>
-  <span class="i18n" lang="es" [class.active]="currentLang === 'es'">Lenguajes de Programación</span>
+  <!-- [class.active] entfernt, 'active' zu 'de' hinzugefügt -->
+  <span class="i18n active" lang="de">Programmiersprachen</span>
+  <span class="i18n" lang="en">Programming Languages</span>
+  <span class="i18n" lang="es">Lenguajes de Programación</span>
 </h2>
 <div class="skill-bar-container">
   
@@ -11,7 +12,8 @@
 
     <span class="skill-name">{{ skill.name }}</span>
     <div class="skill-bar">
-      <div *ngFor="let i of totalSegments" 
+      <!-- KORREKTUR: Iteriere über 'totalSegmentsArray' -->
+      <div *ngFor="let i of totalSegmentsArray" 
            class="bar-segment"
            [style.background-color]="i <= getFilledSegments(skill.level) ? getSkillColor(skill.level) : '#e0e0e0'">
       </div>
@@ -20,9 +22,10 @@
 </div>
 
 <h2>
-  <span class="i18n" lang="de" [class.active]="currentLang === 'de'">Entwicklungsumgebungen</span>
-  <span class="i18n" lang="en" [class.active]="currentLang === 'en'">Development Environments</span>
-  <span class="i18n" lang="es" [class.active]="currentLang === 'es'">Entornos de Desarrollo</span>
+  <!-- [class.active] entfernt, 'active' zu 'de' hinzugefügt -->
+  <span class="i18n active" lang="de">Entwicklungsumgebungen</span>
+  <span class="i18n" lang="en">Development Environments</span>
+  <span class="i18n" lang="es">Entornos de Desarrollo</span>
 </h2>
 <div class="skill-bar-container">
   
@@ -32,7 +35,8 @@
     
     <span class="skill-name">{{ skill.name }}</span>
     <div class="skill-bar">
-      <div *ngFor="let i of totalSegments" 
+      <!-- KORREKTUR: Iteriere über 'totalSegmentsArray' -->
+      <div *ngFor="let i of totalSegmentsArray" 
            class="bar-segment"
            [style.background-color]="i <= getFilledSegments(skill.level) ? getSkillColor(skill.level) : '#e0e0e0'">
       </div>
@@ -41,9 +45,10 @@
 </div>
 
 <h2>
-  <span class="i18n" lang="de" [class.active]="currentLang === 'de'">Weitere Skills</span>
-  <span class="i18n" lang="en" [class.active]="currentLang === 'en'">Other Skills</span>
-  <span class="i18n" lang="es" [class.active]="currentLang === 'es'">Otras Habilidades</span>
+  <!-- [class.active] entfernt, 'active' zu 'de' hinzugefügt -->
+  <span class="i18n active" lang="de">Weitere Skills</span>
+  <span class="i18n" lang="en">Other Skills</span>
+  <span class="i18n" lang="es">Otras Habilidades</span>
 </h2>
 <div class="skill-bar-container">
   
@@ -53,7 +58,8 @@
 
     <span class="skill-name">{{ skill.name }}</span>
     <div class="skill-bar">
-      <div *ngFor="let i of totalSegments" 
+      <!-- KORREKTUR: Iteriere über 'totalSegmentsArray' -->
+      <div *ngFor="let i of totalSegmentsArray" 
            class="bar-segment"
            [style.background-color]="i <= getFilledSegments(skill.level) ? getSkillColor(skill.level) : '#e0e0e0'">
       </div>

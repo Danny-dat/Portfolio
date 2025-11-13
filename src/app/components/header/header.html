@@ -24,9 +24,9 @@
             <i class="fa-solid" [ngClass]="isDarkMode ? 'fa-sun' : 'fa-moon'"></i>
         </button>
     </div>
-    <div class="lang-switcher">
-        <button (click)="switchLang('de')" [class.active]="currentLang === 'de'">DE</button>
-        <button (click)="switchLang('en')" [class.active]="currentLang === 'en'">EN</button>
-        <button (click)="switchLang('es')" [class.active]="currentLang === 'es'">ES</button>
-    </div>
+<div class="lang-switcher">
+    <button (click)="switchLang('de')" [class.active]="currentLang() === 'de'">DE</button>
+    <button (click)="switchLang('en')" [class.active]="currentLang() === 'en'">EN</button>
+    <button (click)="switchLang('es')" [class.active]="currentLang() === 'es'">ES</button>
+</div>
 </div>
