@@ -1,19 +1,51 @@
-/* --- "MEIN WEG" SEKTION --- */
 #path {
     background-color: var(--background-color);
     padding: 60px 0;
+
+    /* NEU: Abstand für die Überschrift hinzugefügt */
+    h2 {
+        margin-bottom: 60px; // Erzeugt mehr Abstand unter der H2
+        margin-top: 50px; // Abstand über der H2
+        font-size: 32px;
+    }
 }
+
 .path-grid {
     display: flex;
-    justify-content: space-between;
+    /* NEU: Zentriert die Karten in der Reihe */
+    justify-content: center; 
+    /* NEU: Erlaubt den Karten, bei Platzmangel umzubrechen */
+    flex-wrap: wrap; 
     gap: 30px;
     text-align: center;
-    margin-bottom: 60px;
+    margin-bottom: 100px;
 }
+
 .path-item {
-    flex: 1;
+    /* NEU: Setzt die Basisbreite auf 320px, erlaubt Schrumpfen (1) und Wachsen (0) */
+    flex: 0 1 320px; 
     padding: 20px;
+    margin-top: 180px;
+    /* NEU: Box-Styling */
+    background: var(--background-color-card, #ffffff); // Hintergrund für die Box (mit Fallback)
+    border-radius: 12px; // Abgerundete Ecken
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05); // Subtiler Schatten
+    transition: transform 0.3s ease, box-shadow 0.3s ease; // Übergang für Hover
+
+    /* NEU: Hover-Effekt (Vergrößerung) */
+    &:hover {
+        transform: scale(1.8); 
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1); // Stärkerer Schatten beim Hovern
+    }
 }
+
+/* NEU: Eigene Stile für Dark Mode (falls --background-color-card nicht definiert ist) */
+body.dark-mode .path-item {
+    background: var(--background-color-card, #2a3035); // Dunklerer Hintergrund für Karten
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+
 .path-item .icon {
     font-size: 2.5rem;
     margin-bottom: 15px;

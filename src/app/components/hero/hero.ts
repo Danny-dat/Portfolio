@@ -34,7 +34,8 @@ export class HeroComponent {
    */
   private updateActiveLanguage(newLang: LanguageCode) {
     // 1. Finde alle 'i18n'-Elemente *innerhalb* dieser <app-hero>-Komponente
-    const allElements: HTMLElement[] = this.el.nativeElement.querySelectorAll('.i18n');
+    // KORREKTUR: NodeList mit Array.from() in ein echtes Array umwandeln.
+    const allElements: HTMLElement[] = Array.from(this.el.nativeElement.querySelectorAll('.i18n'));
 
     allElements.forEach(element => {
       // 2. Entferne zuerst 'active' von allen Elementen

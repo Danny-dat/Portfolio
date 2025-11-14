@@ -1,95 +1,104 @@
-/* --- SCHRIFTART DEFINIEREN --- */
 @font-face {
- font-family: 'Roboto Flex';
- src: url('assets/fonts/RobotoFlex-Variable.ttf') format('truetype-variations');
- font-weight: 100 1000;
- font-style: normal;
- font-display: swap;
+font-family: 'Roboto Flex';
+src: url('assets/fonts/RobotoFlex-Variable.ttf') format('truetype-variations');
+font-weight: 100 1000;
+font-style: normal;
+font-display: swap;
 }
 
 /* --- DESIGN SYSTEM --- */
 :root {
- --primary-color: #54B7FF;
- --yellow-color: #E6BA25;
- --black-color: #232725;
+--primary-color: #54B7FF;
+--yellow-color: #E6BA25;
+--black-color: #232725;
 
- --background-color: #FFFFFF;
- --text-color: var(--black-color);
- --light-gray: #F8F9FA;
- --border-color: #DEE2E6;
+--background-color: #FFFFFF;
+--text-color: var(--black-color);
+--light-gray: #F8F9FA;
+--border-color: #DEE2E6;
 
- --contact-bg: var(--black-color);
- --contact-card-bg: #2B3035;
- --contact-border-color: #495057;
- --contact-text-color: #E9ECEF;
+--contact-bg: var(--black-color);
+--contact-card-bg: #2B3035;
+--contact-border-color: #495057;
+--contact-text-color: #E9ECEF;
 
- --font-family: 'Roboto Flex', 'Helvetica Neue', Arial, sans-serif;
+--font-family: 'Roboto Flex', 'Helvetica Neue', Arial, sans-serif;
 }
 
 /* --- DARK MODE --- */
 body.dark-mode {
 --background-color: #121212;
- --text-color: #E9ECEF;
- --light-gray: #1C1C1C;
- --border-color: #495057;
- --contact-bg: #121212;
- --contact-card-bg: #1C1C1C;
+--text-color: #E9ECEF;
+--light-gray: #1C1C1C;
+--border-color: #495057;
+--contact-bg: #121212;
+--contact-card-bg: #1C1C1C;
 }
 
 /* --- RESET --- */
 *, *::before, *::after {
- box-sizing: border-box;
- margin: 0;
- padding: 0;
+box-sizing: border-box;
+margin: 0;
+padding: 0;
 }
 
 /* --- BODY / BASIS --- */
 html, body {
 height: 100%;
- margin: 0;
- padding: 0;
- overflow-x: hidden;
- overflow-y: auto;     
- scroll-behavior: smooth;
- scroll-snap-type: y mandatory;
+margin: 0;
+padding: 0;
+overflow-x: hidden;
+overflow-y: auto;  
+scroll-behavior: smooth;
+scroll-snap-type: y mandatory;
 }
 
 body {
- font-family: var(--font-family);
- color: var(--text-color);
- background-color: var(--background-color);
- line-height: 1.6;
- transition: background-color 0.3s, color 0.3s;
+font-family: var(--font-family);
+color: var(--text-color);
+background-color: var(--background-color);
+line-height: 1.6;
+transition: background-color 0.3s, color 0.3s;
 }
 
 /* --- TYPO --- */
 h1, h2 {
- text-align: center;
+text-align: center;
 }
 h1 { font-size: 2.5rem; }
 h2 { font-size: 2rem; }
 
+/* --- NEU: LAYOUT / CONTAINER --- */
+.container {
+    width: 100%;           /* Nimmt die volle Breite ein */
+    max-width: 1200px;     /* Aber wird nicht breiter als 1200px */
+    margin-left: auto;     /* Zentriert sich horizontal */
+    margin-right: auto;    /* Zentriert sich horizontal */
+    padding-left: 15px;    /* Ein kleiner Puffer an den Seiten */
+    padding-right: 15px;   /* Ein kleiner Puffer an den Seiten */
+}
+
 /* --- LESBARKEITSHIGHLIGHT (TTS) --- */
 .speaking-highlight {
- background-color: rgba(84, 183, 255, 0.3);
- border-radius: 3px;
- transition: background-color 0.3s ease-in-out;
- -webkit-box-decoration-break: clone;
+background-color: rgba(84, 183, 255, 0.3);
+border-radius: 3px;
+transition: background-color 0.3s ease-in-out;
+-webkit-box-decoration-break: clone;
 box-decoration-break: clone;
 }
 
 /* --- BARRIEREFREIHEITSMODI --- */
 body.high-contrast {
- --background-color: var(--black-color);
- --text-color: var(--yellow-color);
- --primary-color: #00FFFF;
- --secondary-color: var(--yellow-color);
- --light-gray: #1a1a1a;
- --border-color: var(--yellow-color);
- --contact-bg: var(--black-color);
- --contact-card-bg: #1a1a1a;
- --contact-border-color: var(--yellow-color);
- --contact-text-color: var(--yellow-color);
+--background-color: var(--black-color);
+--text-color: var(--yellow-color);
+--primary-color: #00FFFF;
+--secondary-color: var(--yellow-color);
+--light-gray: #1a1a1a;
+--border-color: var(--yellow-color);
+--contact-bg: var(--black-color);
+--contact-card-bg: #1a1a1a;
+--contact-border-color: var(--yellow-color);
+--contact-text-color: var(--yellow-color);
 }
 body.high-contrast #hero { color: var(--yellow-color); }
 body.high-contrast .project-card { box-shadow: 0 0 0 2px var(--primary-color); }
@@ -106,102 +115,102 @@ html.text-xl   { font-size: 130%; }
 
 /* App-Komponenten-Hierarchie */
 app-root {
- display: flex;
- flex-direction: column;
- min-height: 100vh;
- overflow: visible !important; /* kein eigener Scrollkontext */
+display: flex;
+flex-direction: column;
+min-height: 100vh;
+overflow: visible !important; /* kein eigener Scrollkontext */
 }
 
 app-header,
 app-footer {
- flex-shrink: 0;
- z-index: 10;
- position: relative;
+flex-shrink: 0;
+z-index: 10;
+position: relative;
 }
 
 /* Footer immer sichtbar am unteren Rand */
 app-footer {
- position: fixed;
- bottom: 0;
+position: fixed;
+bottom: 0;
 left: 0;
- width: 100%;
+width: 100%;
 z-index: 20;
- background: var(--background-color);
+background: var(--background-color);
 box-shadow: 0 -2px 6px rgba(0,0,0,0.1);
 }
 
 main {
- flex: 1;
- display: block;
- overflow: visible !important; /* verhindert internen Scrollbalken */
-padding-bottom: 100px;    /* Platz für fixen Footer */
+flex: 1;
+display: block;
+overflow: visible !important; /* verhindert internen Scrollbalken */
+padding-bottom: 100px;  /* Platz für fixen Footer */
 }
 
 /* --- SCROLL-ABSCHNITTE --- */
 .scroll-page {
- scroll-snap-align: start;
- min-height: 100vh;      /* mindestens Viewport-Höhe */
- display: flex;
- flex-direction: column;
- justify-content: flex-start; /* natürlicher Fluss */
- align-items: stretch;
- overflow: visible;     /* nichts wegschneiden */
+scroll-snap-align: start;
+min-height: 100vh;   /* mindestens Viewport-Höhe */
+display: flex;
+flex-direction: column;
+justify-content: flex-start; /* natürlicher Fluss */
+align-items: stretch;
+overflow: visible;   /* nichts wegschneiden */
 }
 
 #hero.scroll-page {
- justify-content: center;  /* Hero bleibt zentriert */
- align-items: center;
- height: 100vh;
- overflow: hidden;
+justify-content: center; /* Hero bleibt zentriert */
+align-items: center;
+height: 100vh;
+overflow: hidden;
 }
 
 /* --- SEKTIONS-STANDARD --- */
 #hero, #path, #skills, #projects, #contact {
- min-height: 100vh;
- width: 100%;
- position: relative;
- z-index: 1;
+min-height: 100vh;
+width: 100%;
+position: relative;
+z-index: 1;
 }
 
-#path   { overflow: visible; }
+#path   { overflow: visible; }
 #projects {
- display: flex;
- flex-direction: column;
- align-items: flex-start;   /* Projekte linksbündig */
- justify-content: flex-start;
+display: flex;
+flex-direction: column;
+align-items: flex-start;  /* Projekte linksbündig */
+justify-content: flex-start;
 }
 
 /* --- SICHERHEIT FÜR ANGULAR ROUTER (gegen Shadow-Wrapper) --- */
 :host-context(router-outlet) > div {
- overflow: visible !important;
- height: auto !important;
+overflow: visible !important;
+height: auto !important;
 }
 
 /* --- SPEZIALSEITEN MIT EIGENEM SCROLL --- */
 app-impressum,
 app-datenschutz {
- display: block !important;
- min-height: 100vh;
- width: 100%;
- overflow-y: auto !important;
- overflow-x: hidden !important;
+display: block !important;
+min-height: 100vh;
+width: 100%;
+overflow-y: auto !important;
+overflow-x: hidden !important;
 }
 
 /* --- UI AUSBLENDEN BEI SPEZIALSEITEN --- */
 app-root:has(app-impressum),
 app-root:has(app-datenschutz) {
- .accessibility-menu,
- .header-controls,
- img[src="assets/icon/barrierefreiheit.svg"],
- button:has(img[src="assets/icon/barrierefreiheit.svg"]),
- a:has(img[src="assets/icon/barrierefreiheit.svg"]) {
-  display: none !important;
- }
+.accessibility-menu,
+.header-controls,
+img[src="assets/icon/barrierefreiheit.svg"],
+button:has(img[src="assets/icon/barrierefreiheit.svg"]),
+a:has(img[src="assets/icon/barrierefreiheit.svg"]) {
+ display: none !important;
+}
 }
 
 /* --- SCROLL-SMOOTH-FALLBACK --- */
 @supports (scroll-behavior: smooth) {
- html { scroll-behavior: smooth; }
+html { scroll-behavior: smooth; }
 }
 
 /* =========================================================
@@ -210,36 +219,23 @@ d   ✅ I18N – KORRIGIERTE FUNKTIONSWEISE
 
 /* --- SPRACHUMSCHALTUNG (I18N) – KORRIGIERTE VERSION --- */
 .i18n {
- display: none !important;
- visibility: hidden;
+display: none !important;
+visibility: hidden;
 }
 .i18n.active {
-  /*
-    KORREKTUR: Geändert von 'block' zu 'flex'.
-    GRUND: Das neue 'styles.scss' verwendet intensiv Flexbox.
-    'display: block !important' hat wahrscheinlich das
-    neue Flex-Layout (z.B. von .scroll-page oder .hero-content)
-    gebrochen. 'display: flex' ist eine sicherere Annahme für
-    moderne Layouts, oft werden h1/p selbst zu Flex-Containern
-    gemacht, um Inhalt zu zentrieren.
-  */
- display: flex !important;
- visibility: visible;
-  /*
-    ZUSATZ-TIPP: Wenn 'flex' nicht funktioniert,
-    versuche es mit 'initial' oder 'inherit'.
-    Wenn 'flex' das Layout der H1 (z.B. Textausrichtung)
-    kaputt macht, füge dies hinzu:
-  */
-  flex-direction: column;
-  align-items: center; /* Oder 'flex-start' / 'stretch' */
+
+display: flex !important;
+visibility: visible;
+
+ flex-direction: column;
+ align-items: center; /* Oder 'flex-start' / 'stretch' */
 }
 
 .i18n-inline {
-  display: none !important;
- visibility: hidden;
+ display: none !important;
+visibility: hidden;
 }
 .i18n-inline.active {
- display: inline !important; /* 'inline' ist hier meistens noch korrekt */
- visibility: visible;
+display: inline !important; 
+visibility: visible;
 }
