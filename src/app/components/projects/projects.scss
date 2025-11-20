@@ -89,15 +89,48 @@ body.dark-mode .project-card:hover {
 }
 .project-links {
     margin-top: auto;
+    display: flex;        
+    align-items: center;  
+    /* gap: 15px; */       /* ENTFERNT: Nicht mehr benötigt, da auto-margin verwendet wird */
+    justify-content: flex-start; /* NEU: Stellt sicher, dass der Button links beginnt */
 }
 /* KORREKTUR: Button-Farbe für besseren Kontrast */
 .project-links .btn {
-    margin-right: 10px;
     background-color: var(--primary-color);
+    
+    /* Styles für KLEINEREN Button */
+    width: 180px;         
+    height: 40px;         
+    padding: 0 20px;      
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 20px;  
+    color: white; 
+    font-weight: bold;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.3s;
+    
+    margin-right: auto; /* NEU: Verschiebt nachfolgende Elemente (GitHub-Links) ganz nach rechts */
 }
+
 .project-links .btn:hover {
-    background-color: #0056b3; /* Dunklerer Blauton für Hover */
+    background-color: #0056b3; 
+    transform: translateY(-2px); 
 }
+
+/* * NEU: Stil für die GitHub-Icons, falls sie a-Tags oder ähnliches sind */
+.project-links a:not(.btn) {
+    color: var(--text-color); /* Oder eine passende Farbe */
+    font-size: 2rem; /* Beispielgröße für ein Icon */
+    transition: color 0.3s;
+}
+
+.project-links a:not(.btn):hover {
+    color: var(--primary-color); /* Hover-Effekt */
+}
+
 .navigation-button {
     text-align: center;
     margin-top: 40px;
