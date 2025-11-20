@@ -11,13 +11,12 @@
     height: 100vh; 
     width: 100%;
     
-    /* NEU: Bei Überlauf soll der interne Inhalt scrollen, nicht der gesamte Bildschirm */
+    /* Bei Überlauf soll der interne Inhalt scrollen */
     overflow-y: auto; 
     overflow-x: hidden;
 }
 
 .skills-content {
-    /* Wichtig: Nutzt den verfügbaren Platz im Flex-Container */
     max-width: 1200px;
     width: 100%;
     padding: 0 15px;
@@ -75,83 +74,89 @@ body.dark-mode .skill-item:hover {
 }
 
 /* ======================================= */
-/* --- NEUE SKILL-BAR-STRUKTUR (HINZUGEFÜGT) --- */
+/* --- NEUE SKILL-BAR-STRUKTUR --- */
 /* ======================================= */
 
-// Container für die neuen Reihen (ähnlich wie .skills-container)
+// Container für die neuen Reihen
 .skill-bar-container {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
     gap: 20px;
-    margin-bottom: 40px; // Abstand zwischen den H2-Reihen
+    margin-bottom: 40px;
 }
 
 // Die neue Skill-Karte
 .skill-bar-card {
-    background: var(--card-color, #f4f4f4); // Nutzt deine Variable oder Fallback
+    /* Hintergrund bleibt hell (oder nutzt deine Variable), damit schwarzer Text lesbar ist */
+    background: var(--card-color, #f4f4f4); 
     border-radius: 10px;
     padding: 15px 20px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 
-    // Wichtig, damit es nicht zu groß wird
-    min-width: 120px; // Mindestbreite
-    max-width: 180px; // Maximalbreite
-    flex-grow: 1;     // Lässt die Karten wachsen
+    min-width: 120px;
+    max-width: 180px;
+    flex-grow: 1;
     
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 15px; // Abstand (gap) leicht vergrößert für das Icon
+    gap: 15px;
 }
 
-/* * STYLING FÜR DAS ICON (innerhalb der Karte)
- */
+/* Spezielle Regel für Dark Mode: Karte muss hell bleiben für schwarzen Text */
+body.dark-mode .skill-bar-card {
+    /* Ein helles Grau, damit es nicht zu sehr blendet, aber dunkel genug für Kontrast zum weißen Text war (hier aber für schwarzen Text) */
+    /* Da du schwarzen Text willst, MUSS der Hintergrund hell sein: */
+    background-color: #e0e0e0; 
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+}
+
 .skill-bar-icon {
-    height: 40px; // Du kannst die Höhe anpassen
-    width: 40px;  // Du kannst die Breite anpassen
-    object-fit: contain; // Verhindert, dass das Icon verzerrt wird
+    height: 40px;
+    width: 40px;
+    object-fit: contain;
 }
 
 .skill-name {
-    font-weight: 600; // Etwas dicker
+    font-weight: 600;
     font-size: 1.1rem;
-    color: var(--text-color, #333); // Nutzt deine Textfarbe oder Fallback
+    
+    /* WICHTIG: Immer Schwarz (oder deine dunkle Standardfarbe), auch im Dark Mode */
+    color: var(--black-color, #232725) !important; 
 }
 
 // Container für die 6 Segmente
 .skill-bar {
     display: flex;
     width: 100%;
-    height: 18px; // Höhe des Balkens
-    gap: 4px;     // Lücke zwischen den Segmenten
+    height: 18px;
+    gap: 4px;
 }
 
 // Jedes einzelne Segment
 .bar-segment {
-    flex: 1; // 6 Segmente nehmen den vollen Platz ein
+    flex: 1;
     border-radius: 3px;
-    
-    // Die Hintergrundfarbe (#e0e0e0 für leer) wird direkt
-    // über [style.background-color] im HTML gesetzt.
     transition: background-color 0.4s ease;
 }
 
-/* * ANPASSUNG FÜR DEIN i18n-SYSTEM
- * (Falls du es nicht schon global hast)
- */
+/* --- I18N --- */
 h2 .i18n {
-    display: none; // Verstecke alle Sprachen
+    display: none;
 }
 h2 .i18n.active {
-    display: inline; // Zeige nur die aktive Sprache
+    display: inline;
+}
+
+h2 {
+    margin-bottom: 30px; 
 }
 
 /* --- ANIMATION --- */
-/* Stelle sicher, dass die Animation nicht über den Rand hinausragt */
 #skills animation-lottie {
     width: 100%;
-    max-width: 400px; /* Oder eine gewünschte Größe */
+    max-width: 400px;
     height: auto;
     margin-bottom: 30px;
 }

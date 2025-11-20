@@ -7,9 +7,7 @@
     background-color: var(--contact-bg);
     height: 100vh;
     width: 100%;
-    overflow-y: auto;
-    overflow-x: hidden;
-    /* KORREKTUR: min-height: calc(100vh + 100px); ENTFERNT */
+
 }
 
 /* NEU: Styling für die Haupt-Sektionsüberschrift */
@@ -31,6 +29,7 @@
     justify-content: center;
     align-items: center;
     gap: 30px;
+    flex-wrap: wrap;
 }
 
 .contact-info-col, .contact-form-col {

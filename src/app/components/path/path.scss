@@ -1,9 +1,8 @@
 /* --- PFAD SEKTION --- */
 #path {
-    /* WICHTIGE ÄNDERUNGEN für Full-Screen Snap Scrolling */
     height: 100vh; // Erzwingt volle Bildschirmhöhe
     width: 100%;
-    overflow-y: auto; // Erlaubt internes Scrollen, falls Inhalt die Höhe überschreitet
+    overflow-y: auto; // Erlaubt internes Scrollen
     overflow-x: hidden; // Verhindert horizontales Scrollen
 
     /* Flex-Container für Zentrierung */
@@ -15,19 +14,16 @@
     background-color: var(--background-color);
     padding: 60px 0;
 
-    /* NEU: Abstand für die Überschrift hinzugefügt */
     h2 {
-        margin-bottom: 60px; // Erzeugt mehr Abstand unter der H2
-        margin-top: 50px; // Abstand über der H2
+        margin-bottom: 60px; 
+        margin-top: 50px; 
         font-size: 32px;
     }
 }
 
 .path-grid {
     display: flex;
-    /* NEU: Zentriert die Karten in der Reihe */
     justify-content: center; 
-    /* NEU: Erlaubt den Karten, bei Platzmangel umzubrechen */
     flex-wrap: wrap; 
     gap: 30px;
     text-align: center;
@@ -35,29 +31,50 @@
 }
 
 .path-item {
-    /* NEU: Setzt die Basisbreite auf 320px, erlaubt Schrumpfen (1) und Wachsen (0) */
+    /* Basisbreite auf 320px */
     flex: 0 1 320px; 
     padding: 20px;
     margin-top: 180px;
-    /* NEU: Box-Styling */
-    background: var(--background-color-card, #ffffff); // Hintergrund für die Box (mit Fallback)
-    border-radius: 12px; // Abgerundete Ecken
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05); // Subtiler Schatten
-    transition: transform 0.3s ease, box-shadow 0.3s ease; // Übergang für Hover
+    
+    /* Standard (Light Mode) */
+    background: var(--background-color-card, #ffffff); 
+    border-radius: 12px; 
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05); 
+    transition: transform 0.3s ease, box-shadow 0.3s ease; 
+    
+    /* Standard Textfarbe (wird unten überschrieben) */
+    color: var(--text-color);
 
-    /* NEU: Hover-Effekt (Vergrößerung) */
     &:hover {
         transform: scale(1.8); 
-        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1); // Stärkerer Schatten beim Hovern
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1); 
     }
 }
 
-/* NEU: Eigene Stile für Dark Mode (falls --background-color-card nicht definiert ist) */
-body.dark-mode .path-item {
-    background: var(--background-color-card, #2a3035); // Dunklerer Hintergrund für Karten
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-}
 
+:host-context(.dark-mode) {
+
+    .path-item {
+        
+        --text-color: #232725; 
+
+      
+        background: #e0e0e0; 
+        
+        
+        color: var(--text-color) !important;
+        
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+    }
+
+  
+    .path-item h3,
+    .path-item p,
+    .path-item span,
+    .path-item div {
+        color: var(--text-color) !important;
+    }
+}
 
 .path-item .icon {
     font-size: 2.5rem;

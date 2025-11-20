@@ -1,253 +1,373 @@
 @font-face {
-font-family: 'Roboto Flex';
-src: url('assets/fonts/RobotoFlex-Variable.ttf') format('truetype-variations');
-font-weight: 100 1000;
-font-style: normal;
-font-display: swap;
+    font-family: 'Roboto Flex';
+    src: url('assets/fonts/RobotoFlex-Variable.ttf') format('truetype-variations');
+    font-weight: 100 1000;
+    font-style: normal;
+    font-display: swap;
 }
 
 /* --- DESIGN SYSTEM --- */
 :root {
---primary-color: #54B7FF;
---yellow-color: #E6BA25;
---black-color: #232725;
-
---background-color: #FFFFFF;
---text-color: var(--black-color);
---light-gray: #F8F9FA;
---border-color: #DEE2E6;
-
---contact-bg: var(--black-color);
---contact-card-bg: #2B3035;
---contact-border-color: #495057;
---contact-text-color: #E9ECEF;
-
---font-family: 'Roboto Flex', 'Helvetica Neue', Arial, sans-serif;
+    --primary-color: #54B7FF;
+    --yellow-color: #E6BA25;
+    --black-color: #232725;
+    --background-color: #FFFFFF;
+    --text-color: var(--black-color);
+    --light-gray: #F8F9FA;
+    --border-color: #DEE2E6;
+    --contact-bg: var(--black-color);
+    --contact-card-bg: #2B3035;
+    --contact-border-color: #495057;
+    --contact-text-color: #E9ECEF;
+    --font-family: 'Roboto Flex', 'Helvetica Neue', Arial, sans-serif;
 }
 
 /* --- DARK MODE --- */
 body.dark-mode {
---background-color: #121212;
---text-color: #E9ECEF;
---light-gray: #1C1C1C;
---border-color: #495057;
---contact-bg: #121212;
---contact-card-bg: #1C1C1C;
+    --background-color: #121212;
+    --text-color: #E9ECEF;
+    --light-gray: #1C1C1C;
+    --border-color: #495057;
+    --contact-bg: #121212;
+    --contact-card-bg: #1C1C1C;
 }
 
 /* --- RESET --- */
 *, *::before, *::after {
-box-sizing: border-box;
-margin: 0;
-padding: 0;
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
 }
 
-/* --- BODY / BASIS --- */
-html, body {
-height: 100%;
-margin: 0;
-padding: 0;
-overflow-x: hidden;
-/* scroll-behavior und snap-type auf html verschoben, um Konflikte zu vermeiden */
-scroll-behavior: smooth; 
-}
+/* =========================================================
+   🧭 GLOBALES SCROLL-VERHALTEN (FINALER FIX)
+   ========================================================= */
 
-html { /* NEU/KORRIGIERT */
-    overflow-y: scroll;  
+html {
+    /* Wichtig: min-height erlaubt Wachstum, verhindert "Blockieren" */
+    min-height: 100%;
+    
+    /* Nur HTML darf scrollen -> Verhindert doppelte Balken */
+    overflow-y: auto; 
+    overflow-x: hidden;
+    
+    /* Globales Smooth Scroll & Snap */
+    scroll-behavior: smooth;
     scroll-snap-type: y proximity;
-    scroll-padding-top: 0.1px; 
-}
-/* ... */
-main {
-flex: 1;
-display: block;
-overflow: visible !important; 
-padding-bottom: 0;  /* KORREKTUR: Entfernt den Abstand, der den weißen Balken verursacht */
-}
-body {
-font-family: var(--font-family);
-color: var(--text-color);
-background-color: var(--background-color);
-line-height: 1.6;
-transition: background-color 0.3s, color 0.3s;
+    scroll-padding-top: 0.1px;
 }
 
-/* --- TYPO --- */
-h1, h2 {
-text-align: center;
+body {
+    min-height: 100vh;
+    margin: 0;
+    padding: 0;
+    
+    /* Body muss sichtbar sein, damit er mitwächst */
+    overflow: visible; 
+    
+    font-family: var(--font-family);
+    color: var(--text-color);
+    background-color: var(--background-color);
+    line-height: 1.6;
+    transition: background-color 0.3s, color 0.3s;
 }
+
+/* =========================================================
+   🧭 APP-STRUKTUR
+   ========================================================= */
+
+app-root {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    /* WICHTIG: Kein eigener Scrollkontext */
+    overflow: visible; 
+}
+
+main {
+    flex: 1;
+    display: block;
+    /* WICHTIG: Kein eigener Scrollkontext */
+    overflow: visible; 
+    /* Muss 0 sein, damit der weiße Balken unter Contact verschwindet */
+    padding-bottom: 0; 
+}
+
+app-header,
+app-footer {
+    flex-shrink: 0;
+    z-index: 10;
+    position: relative;
+}
+
+/* Footer immer sichtbar am unteren Rand */
+app-footer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    z-index: 20;
+    background: var(--background-color);
+    box-shadow: 0 -2px 6px rgba(0,0,0,0.1);
+}
+
+/* --- SICHERHEIT FÜR ANGULAR ROUTER --- */
+:host-context(router-outlet) > div {
+    overflow: visible !important;
+    height: auto !important;
+}
+
+/* --- TYPO & CONTAINER --- */
+h1, h2 { text-align: center; }
 h1 { font-size: 2.5rem; }
 h2 { font-size: 2rem; }
 
-/* --- NEU: LAYOUT / CONTAINER --- */
 .container {
-    width: 100%;           /* Nimmt die volle Breite ein */
-    max-width: 1200px;     /* Aber wird nicht breiter als 1200px */
-    margin-left: auto;     /* Zentriert sich horizontal */
-    margin-right: auto;    /* Zentriert sich horizontal */
-    padding-left: 15px;    /* Ein kleiner Puffer an den Seiten */
-    padding-right: 15px;   /* Ein kleiner Puffer an den Seiten */
+    width: 100%;
+    max-width: 1200px;
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 15px;
+    padding-right: 15px;
 }
 
-/* --- LESBARKEITSHIGHLIGHT (TTS) --- */
+/* --- SCROLL-ABSCHNITTE --- */
+.scroll-page {
+    scroll-snap-align: start;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: stretch;
+    overflow: visible;
+}
+
+#hero.scroll-page {
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    overflow: hidden;
+}
+
+/* --- SEKTIONS-STANDARD --- */
+#hero, #path, #skills, #projects, #contact {
+    min-height: 100vh;
+    width: 100%;
+    position: relative;
+    z-index: 1;
+    scroll-snap-align: start;
+}
+
+#path { overflow: visible; }
+#projects {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+}
+
+/* --- SPEZIALSEITEN --- */
+app-impressum,
+app-datenschutz {
+    display: block !important;
+    min-height: 100vh;
+    width: 100%;
+    overflow-y: auto !important;
+    overflow-x: hidden !important;
+}
+
+/* UI ausblenden bei Spezialseiten */
+app-root:has(app-impressum),
+app-root:has(app-datenschutz) {
+    .accessibility-menu,
+    .header-controls,
+    img[src="assets/icon/barrierefreiheit.svg"],
+    button:has(img[src="assets/icon/barrierefreiheit.svg"]),
+    a:has(img[src="assets/icon/barrierefreiheit.svg"]) {
+        display: none !important;
+    }
+}
+
+/* --- ACCESSIBILITY & UTILS --- */
 .speaking-highlight {
-background-color: rgba(84, 183, 255, 0.3);
-border-radius: 3px;
-transition: background-color 0.3s ease-in-out;
--webkit-box-decoration-break: clone;
-box-decoration-break: clone;
+    background-color: rgba(84, 183, 255, 0.3);
+    border-radius: 3px;
+    transition: background-color 0.3s ease-in-out;
+    -webkit-box-decoration-break: clone;
+    box-decoration-break: clone;
 }
 
-/* --- BARRIEREFREIHEITSMODI --- */
+html.text-large { font-size: 115%; }
+html.text-xl    { font-size: 130%; }
+
+/* High Contrast Mode */
 body.high-contrast {
---background-color: var(--black-color);
---text-color: var(--yellow-color);
---primary-color: #00FFFF;
---secondary-color: var(--yellow-color);
---light-gray: #1a1a1a;
---border-color: var(--yellow-color);
---contact-bg: var(--black-color);
---contact-card-bg: #1a1a1a;
---contact-border-color: var(--yellow-color);
---contact-text-color: var(--yellow-color);
+    --background-color: var(--black-color);
+    --text-color: var(--yellow-color);
+    --primary-color: #00FFFF;
+    --secondary-color: var(--yellow-color);
+    --light-gray: #1a1a1a;
+    --border-color: var(--yellow-color);
+    --contact-bg: var(--black-color);
+    --contact-card-bg: #1a1a1a;
+    --contact-border-color: var(--yellow-color);
+    --contact-text-color: var(--yellow-color);
 }
 body.high-contrast #hero { color: var(--yellow-color); }
 body.high-contrast .project-card { box-shadow: 0 0 0 2px var(--primary-color); }
 body.high-contrast .btn { background-color: var(--primary-color); color: #000000; }
 body.high-contrast .speaking-highlight { background-color: rgba(0, 255, 255, 0.3); }
 
-/* --- SCHRIFTGRÖSSE --- */
-html.text-large { font-size: 115%; }
-html.text-xl   { font-size: 130%; }
-
-/* =========================================================
-   🧭 APP-STRUKTUR & SCROLL-VERHALTEN
-   ========================================================= */
-
-/* App-Komponenten-Hierarchie */
-app-root {
-display: flex;
-flex-direction: column;
-min-height: 100vh;
-overflow: visible !important; /* WICHTIG: Sollte keinen eigenen Scrollkontext bilden */
-}
-
-app-header,
-app-footer {
-flex-shrink: 0;
-z-index: 10;
-position: relative;
-}
-
-/* Footer immer sichtbar am unteren Rand */
-app-footer {
-position: fixed;
-bottom: 0;
-left: 0;
-width: 100%;
-z-index: 20;
-background: var(--background-color);
-box-shadow: 0 -2px 6px rgba(0,0,0,0.1);
-}
-
-main {
-flex: 1;
-display: block;
-overflow: visible !important; /* verhindert internen Scrollbalken */
-padding-bottom: 100px;  /* Platz für fixen Footer */
-}
-
-/* --- SCROLL-ABSCHNITTE --- */
-.scroll-page {
-scroll-snap-align: start;
-min-height: 100vh;   /* mindestens Viewport-Höhe */
-display: flex;
-flex-direction: column;
-justify-content: flex-start; /* natürlicher Fluss */
-align-items: stretch;
-overflow: visible;   /* nichts wegschneiden */
-}
-
-#hero.scroll-page {
-justify-content: center; /* Hero bleibt zentriert */
-align-items: center;
-height: 100vh;
-overflow: hidden;
-}
-
-/* --- SEKTIONS-STANDARD --- */
-#hero, #path, #skills, #projects, #contact {
-min-height: 100vh;
-width: 100%;
-position: relative;
-z-index: 1;
-scroll-snap-align: start; /* Stellt sicher, dass alle Hauptsektionen Snap-Ziele sind */
-}
-
-#path   { overflow: visible; }
-#projects {
-display: flex;
-flex-direction: column;
-align-items: flex-start;  /* Projekte linksbündig */
-justify-content: flex-start;
-}
-
-/* --- SICHERHEIT FÜR ANGULAR ROUTER (gegen Shadow-Wrapper) --- */
-:host-context(router-outlet) > div {
-overflow: visible !important;
-height: auto !important;
-}
-
-/* --- SPEZIALSEITEN MIT EIGENEM SCROLL --- */
-app-impressum,
-app-datenschutz {
-display: block !important;
-min-height: 100vh;
-width: 100%;
-overflow-y: auto !important;
-overflow-x: hidden !important;
-}
-
-/* --- UI AUSBLENDEN BEI SPEZIALSEITEN --- */
-app-root:has(app-impressum),
-app-root:has(app-datenschutz) {
-.accessibility-menu,
-.header-controls,
-img[src="assets/icon/barrierefreiheit.svg"],
-button:has(img[src="assets/icon/barrierefreiheit.svg"]),
-a:has(img[src="assets/icon/barrierefreiheit.svg"]) {
- display: none !important;
-}
-}
-
-/* --- SCROLL-SMOOTH-FALLBACK --- */
-@supports (scroll-behavior: smooth) {
-html { scroll-behavior: smooth; }
-}
-
-/* =========================================================
-d   ✅ I18N – KORRIGIERTE FUNKTIONSWEISE
-   ========================================================= */
-
-/* --- SPRACHUMSCHALTUNG (I18N) – KORRIGIERTE VERSION --- */
+/* --- I18N --- */
 .i18n {
-display: none !important;
-visibility: hidden;
+    display: none !important;
+    visibility: hidden;
 }
 .i18n.active {
-
-display: flex !important;
-visibility: visible;
-
- flex-direction: column;
- align-items: center; /* Oder 'flex-start' / 'stretch' */
+    display: flex !important;
+    visibility: visible;
+    flex-direction: column;
+    align-items: center;
 }
-
 .i18n-inline {
- display: none !important;
-visibility: hidden;
+    display: none !important;
+    visibility: hidden;
 }
 .i18n-inline.active {
-display: inline !important; 
-visibility: visible;
+    display: inline !important; 
+    visibility: visible;
+}
+
+/* =========================================================
+   📱 GLOBALE RESPONSIVE ANPASSUNGEN (ALL-IN-ONE)
+   ========================================================= */
+
+/* --- TABLETS & KLEINERE LAPTOPS (max-width: 900px) --- */
+@media (max-width: 900px) {
+    
+    /* HEADER: Icons nach rechts schieben */
+    .lang-switcher {
+        margin-left: auto !important; 
+    }
+    .theme-switcher {
+        margin-left: 10px !important; 
+    }
+    app-header nav, app-header .container {
+        display: flex !important;
+        align-items: center !important;
+    }
+
+    /* HERO: Bild und Text stapeln */
+    app-root #hero { 
+        flex-direction: column !important; 
+        padding-top: 100px !important;
+        height: auto !important; /* Höhe flexibel machen */
+        min-height: 100vh;
+    }
+    
+    /* Profilbild im Hero */
+    .hero-content .profile-image-wrapper {
+        position: static !important; /* Keine absolute Position mehr */
+        margin: 0 auto 30px auto !important;
+        width: 220px !important;
+        transform: none !important;
+    }
+
+    /* KONTAKT: Nebeneinander zu untereinander */
+    .contact-columns-container {
+        flex-direction: column !important;
+        padding: 10px !important;
+    }
+    
+    .contact-info-col, .contact-form-col {
+        flex-basis: auto !important;
+        width: 100% !important;
+        max-width: 100% !important;
+        padding: 0 !important;
+    }
+
+    /* Kontakt-Karte darf wachsen */
+    .contact-card-wrapper {
+        height: auto !important;
+        min-height: 500px !important;
+        padding-bottom: 100px !important; /* Platz für Button */
+    }
+}
+
+/* --- SMARTPHONES (max-width: 600px) --- */
+@media (max-width: 600px) {
+    
+    /* TYPO: Überschriften kleiner */
+    h1 { font-size: 1.8rem !important; }
+    h2 { font-size: 1.5rem !important; }
+
+    /* PATH: Grid auflösen */
+    .path-grid {
+        gap: 15px !important;
+    }
+    .path-item {
+        flex: 0 1 100% !important; /* Volle Breite */
+        width: 100% !important;
+        margin-top: 40px !important;
+    }
+
+    /* SKILLS: 2-Spaltig statt riesig */
+    .skills-grid {
+        gap: 10px !important;
+    }
+    .skill-item {
+        width: 45% !important;
+        min-width: 100px !important;
+        padding: 10px !important;
+    }
+}
+
+/* --- SEHR KLEINE HANDYS (max-width: 380px) --- */
+@media (max-width: 380px) {
+    
+    /* CONTAINER: Padding reduzieren */
+    .container {
+        padding-left: 10px !important;
+        padding-right: 10px !important;
+    }
+
+    /* PROJECTS: Karten dürfen nicht breiter als der Screen sein */
+    .project-card {
+        width: 100% !important;
+        min-width: 0 !important; /* Verhindert Overflow */
+        max-width: 300px !important; /* Optik */
+    }
+
+    /* Projekt-Bildhöhe anpassen */
+    .project-image-placeholder {
+        height: 160px !important;
+    }
+
+    /* Projekt-Buttons stapeln */
+    .project-links {
+        flex-wrap: wrap !important;
+        justify-content: center !important;
+        gap: 15px !important;
+    }
+    
+    .project-links .btn {
+        margin-right: 0 !important;
+        width: 100% !important;
+    }
+
+    /* HERO: Noch kompakter */
+    .hero-content .profile-image-wrapper {
+        width: 160px !important;
+    }
+
+    /* KONTAKT: Button anpassen */
+    .contact-card-wrapper .btn {
+        width: 100% !important;
+        bottom: 20px !important;
+    }
+    
+    /* Schriftgrößen in Inputs (verhindert Zoom auf iPhone) */
+    #contact input, #contact textarea {
+        font-size: 16px !important; 
+    }
 }

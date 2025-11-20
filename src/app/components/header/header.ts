@@ -1,6 +1,6 @@
 import { Component, Inject, PLATFORM_ID, AfterViewInit, Signal } from '@angular/core';
 import { CommonModule, isPlatformBrowser } from '@angular/common';
-import { LanguageService, LanguageCode } from '../../language.service'; // Importieren
+import { LanguageService, LanguageCode } from '../../language.service';
 
 @Component({
   selector: 'app-header',
@@ -10,34 +10,33 @@ import { LanguageService, LanguageCode } from '../../language.service'; // Impor
   styleUrls: ['./header.scss']
 })
 export class HeaderComponent implements AfterViewInit {
-  // @Input und @Output sind entfernt
-
   private currentlyHighlightedElement: HTMLElement | null = null;
   public isBrowser: boolean;
-  public readonly currentLang: Signal<LanguageCode>; // Ist jetzt ein Signal
+  public readonly currentLang: Signal<LanguageCode>;
 
   constructor(
     @Inject(PLATFORM_ID) private platformId: Object,
-    public languageService: LanguageService // Service injizieren
+    public languageService: LanguageService
   ) {
     this.isBrowser = isPlatformBrowser(this.platformId);
-    // Signal direkt vom Service übernehmen
     this.currentLang = this.languageService.activeLanguage;
   }
   
   ngAfterViewInit(): void {
     if (this.isBrowser) {
+      // Stimmen laden, damit sie verfügbar sind (Browser-Eigenheit)
+      if ('speechSynthesis' in window) {
+          window.speechSynthesis.getVoices();
+      }
       window.addEventListener('beforeunload', () => {
         speechSynthesis.cancel();
       });
     }
   }
 
-  // Diese Methode ändert jetzt das Signal im Service
   switchLang(lang: LanguageCode) {
     console.log('Wechsle Sprache zu:', lang);
     this.languageService.activeLanguage.set(lang);
-    console.log('Neuer aktiver Wert:', this.currentLang());
   }
 
   isDarkMode = false;
@@ -71,6 +70,7 @@ export class HeaderComponent implements AfterViewInit {
         return;
       }
 
+      // Abbrechen, falls schon gesprochen wird
       if (speechSynthesis.speaking) {
         speechSynthesis.cancel();
         if (this.currentlyHighlightedElement) {
@@ -80,6 +80,14 @@ export class HeaderComponent implements AfterViewInit {
         return;
       }
 
+      // 1. Aktuelle Sprache ermitteln und Mapping erstellen
+      const activeLangCode = this.currentLang();
+      let targetLang = 'de-DE'; // Standard
+      
+      if (activeLangCode === 'en') targetLang = 'en-US';
+      else if (activeLangCode === 'es') targetLang = 'es-ES';
+
+      // Nur sichtbare, aktive Elemente vorlesen
       const allActiveElements = document.querySelectorAll('main .i18n.active');
       const visibleElements = Array.from(allActiveElements).filter(el => this.isElementInViewport(el as HTMLElement)) as HTMLElement[];
 
@@ -92,9 +100,17 @@ export class HeaderComponent implements AfterViewInit {
         if (text && text.trim().length > 0) {
           const utterance = new SpeechSynthesisUtterance(text);
           
-          // KORREKTUR HIER: this.currentLang() mit Klammern aufrufen
-          const voices = speechSynthesis.getVoices().filter(v => v.lang.startsWith(this.currentLang()));
-          utterance.voice = voices[0] || null;
+          // WICHTIG: Dem Browser explizit die Sprache mitteilen
+          utterance.lang = targetLang;
+
+          // Optional: Versuchen, eine passende Stimme zu finden
+          const voices = speechSynthesis.getVoices();
+          const matchingVoice = voices.find(v => v.lang === targetLang) || 
+                                voices.find(v => v.lang.startsWith(activeLangCode));
+          
+          if (matchingVoice) {
+            utterance.voice = matchingVoice;
+          }
 
           utterance.onstart = () => {
             if (this.currentlyHighlightedElement) {
@@ -108,6 +124,7 @@ export class HeaderComponent implements AfterViewInit {
         }
       });
 
+      // Cleanup am Ende
       const finalUtterance = new SpeechSynthesisUtterance('');
       finalUtterance.onstart = () => {
          if (this.currentlyHighlightedElement) {

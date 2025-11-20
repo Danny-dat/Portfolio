@@ -1,27 +1,22 @@
-// :host bezieht sich auf die <app-root> Komponente
+
 :host {
   display: flex;
   flex-direction: column;
-  height: 100vh; // Wichtig: <app-root> füllt den gesamten Bildschirm
+  height: 100vh; 
 }
 
 main {
-  flex-grow: 1; // <main> füllt den restlichen Platz
-  overflow-y: auto; // DAS IST DER EINZIGE SCROLLBALKEN, DEN WIR ERLAUBEN
+  flex-grow: 1; 
+  overflow-y: auto; 
   
-  scroll-snap-type: y mandatory; 
-  scroll-behavior: smooth;
   
-  // Passe '80px' an die exakte Höhe deines Headers an
-  scroll-padding-top: 80px; 
 }
 
 app-header, app-footer {
-  flex-shrink: 0; // Verhindert, dass Header/Footer schrumpfen
+  flex-shrink: 0; 
 }
-// Dieser Block sorgt dafür, dass der Inhaltsbereich den gesamten
-// freien Platz füllt und den Footer nach unten drückt.
+
 app-root > router-outlet {
-  display: block; // Muss ein Block-Element sein, um flex-grow zu unterstützen
-  flex-grow: 1;   // Nimmt allen verfügbaren vertikalen Platz ein
+  display: block; 
+  flex-grow: 1;   
 }
