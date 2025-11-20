@@ -1,4 +1,5 @@
 /* --- KONTAKT-SEKTION LAYOUT --- */
+/* --- KONTAKT-SEKTION LAYOUT --- */
 #contact {
     display: flex;
     flex-direction: column;
@@ -6,7 +7,21 @@
     background-color: var(--contact-bg);
     height: 100vh;
     width: 100%;
+    overflow-y: auto;
+    overflow-x: hidden;
+    /* KORREKTUR: min-height: calc(100vh + 100px); ENTFERNT */
 }
+
+/* NEU: Styling für die Haupt-Sektionsüberschrift */
+#contact > h2 {
+    font-size: 2.5rem; /* Korrigierte Syntax und Größe */
+    margin-top: 40px; 
+    margin-bottom: 40px; /* Abstand zum Inhalt */
+    color: var(--contact-text-color, aliceblue); /* Stellt sicher, dass die Farbe passt */
+    text-align: center;
+    flex-shrink: 0; /* Verhindert, dass die Überschrift schrumpft */
+}
+
 
 .contact-columns-container {
     display: flex;
@@ -105,11 +120,4 @@
 .contact-card-wrapper .btn:hover {
     background-color: #0056b3;
     transform: translateX(-50%) translateY(-2px);
-}
-h2 {
-    font-size: 2,5rem;
-    margin-top: 40px;
-    margin-bottom: 0px;
-    color: aliceblue;
-    text-align: center;
 }

@@ -48,11 +48,22 @@ height: 100%;
 margin: 0;
 padding: 0;
 overflow-x: hidden;
-overflow-y: auto;  
-scroll-behavior: smooth;
-scroll-snap-type: y mandatory;
+/* scroll-behavior und snap-type auf html verschoben, um Konflikte zu vermeiden */
+scroll-behavior: smooth; 
 }
 
+html { /* NEU/KORRIGIERT */
+    overflow-y: scroll;  
+    scroll-snap-type: y proximity;
+    scroll-padding-top: 0.1px; 
+}
+/* ... */
+main {
+flex: 1;
+display: block;
+overflow: visible !important; 
+padding-bottom: 0;  /* KORREKTUR: Entfernt den Abstand, der den weißen Balken verursacht */
+}
 body {
 font-family: var(--font-family);
 color: var(--text-color);
@@ -118,7 +129,7 @@ app-root {
 display: flex;
 flex-direction: column;
 min-height: 100vh;
-overflow: visible !important; /* kein eigener Scrollkontext */
+overflow: visible !important; /* WICHTIG: Sollte keinen eigenen Scrollkontext bilden */
 }
 
 app-header,
@@ -170,6 +181,7 @@ min-height: 100vh;
 width: 100%;
 position: relative;
 z-index: 1;
+scroll-snap-align: start; /* Stellt sicher, dass alle Hauptsektionen Snap-Ziele sind */
 }
 
 #path   { overflow: visible; }

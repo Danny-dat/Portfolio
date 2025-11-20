@@ -1,5 +1,17 @@
 /* --- PROJEKTE SEKTION --- */
 #projects {
+    /* WICHTIGE ÄNDERUNGEN für Full-Screen Snap Scrolling */
+    height: 100vh; // Erzwingt volle Bildschirmhöhe
+    width: 100%;
+    overflow-y: auto; // Erlaubt internes Scrollen, falls Inhalt die Höhe überschreitet
+    overflow-x: hidden; // Verhindert horizontales Scrollen
+
+    /* Flex-Container für Zentrierung */
+    display: flex;
+    flex-direction: column;
+    justify-content: center; // Zentriert den Inhalt vertikal
+    align-items: center; // Zentriert den Inhalt horizontal
+    
     background-color: var(--light-gray);
     /* padding: 60px 0;  <-- Entfernt, wird jetzt von styles.scss gesteuert */
 }
@@ -91,8 +103,8 @@ body.dark-mode .project-card:hover {
     margin-top: auto;
     display: flex;        
     align-items: center;  
-    /* gap: 15px; */       /* ENTFERNT: Nicht mehr benötigt, da auto-margin verwendet wird */
-    justify-content: flex-start; /* NEU: Stellt sicher, dass der Button links beginnt */
+    /* gap: 15px; */       
+    justify-content: flex-start; 
 }
 /* KORREKTUR: Button-Farbe für besseren Kontrast */
 .project-links .btn {
@@ -112,7 +124,7 @@ body.dark-mode .project-card:hover {
     cursor: pointer;
     transition: background-color 0.3s, transform 0.3s;
     
-    margin-right: auto; /* NEU: Verschiebt nachfolgende Elemente (GitHub-Links) ganz nach rechts */
+    margin-right: auto; 
 }
 
 .project-links .btn:hover {
@@ -122,13 +134,13 @@ body.dark-mode .project-card:hover {
 
 /* * NEU: Stil für die GitHub-Icons, falls sie a-Tags oder ähnliches sind */
 .project-links a:not(.btn) {
-    color: var(--text-color); /* Oder eine passende Farbe */
-    font-size: 2rem; /* Beispielgröße für ein Icon */
+    color: var(--text-color); 
+    font-size: 2rem; 
     transition: color 0.3s;
 }
 
 .project-links a:not(.btn):hover {
-    color: var(--primary-color); /* Hover-Effekt */
+    color: var(--primary-color); 
 }
 
 .navigation-button {

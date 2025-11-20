@@ -1,4 +1,17 @@
+/* --- PFAD SEKTION --- */
 #path {
+    /* WICHTIGE ÄNDERUNGEN für Full-Screen Snap Scrolling */
+    height: 100vh; // Erzwingt volle Bildschirmhöhe
+    width: 100%;
+    overflow-y: auto; // Erlaubt internes Scrollen, falls Inhalt die Höhe überschreitet
+    overflow-x: hidden; // Verhindert horizontales Scrollen
+
+    /* Flex-Container für Zentrierung */
+    display: flex;
+    flex-direction: column;
+    justify-content: center; // Zentriert den Inhalt vertikal
+    align-items: center; // Zentriert den Inhalt horizontal
+    
     background-color: var(--background-color);
     padding: 60px 0;
 
